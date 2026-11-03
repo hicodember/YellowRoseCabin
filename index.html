@@ -1,0 +1,1163 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Yellow Rose Cabin Upgrade</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one artifact, three views by hash. #site = the guest website (bright, photo-led). #owner = Sandy's back end (GitHub-style light admin). #plan = what Codember delivers. */
+:root{
+  color-scheme:light;
+  --bg:#fbfcf8; --white:#ffffff; --sunk:#f1f4ee; --ink:#18382a; --text:#26322b; --muted:#5b6a61; --line:#dfe5dc;
+  --sun:#ffd34d; --sun-deep:#e3a517; --sun-ink:#7a5200; --sun-soft:#fff6d8;
+  --lake:#2c6a8a; --lake-soft:#e7f3fa; --leaf:#2d7a4f; --leaf-soft:#e6f4ea;
+  --rose:#c2414b; --rose-soft:#fdecee;
+  --f-display:"Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:14px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--f-display);color:var(--ink);margin:0;line-height:1.12;text-wrap:balance}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:700}
+h3{font-size:20px;font-weight:600}
+p{margin:0}
+a{color:var(--lake)}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--text);background:var(--white);border:1px solid var(--line);border-radius:9px;padding:9px 11px;min-width:0;width:100%}
+textarea{resize:vertical;min-height:84px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--sun);outline-offset:0;border-color:var(--sun-deep)}
+:focus-visible{outline:2px solid var(--lake);outline-offset:2px;border-radius:8px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:11px 18px;font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap}
+.btn.sun{background:var(--sun-deep);color:#1c1406;box-shadow:0 6px 16px rgba(227,165,23,.32)}
+.btn.sun:hover{background:#f0b52a}
+.btn.ink{background:var(--ink);color:#fff}
+.btn.line{background:var(--white);color:var(--ink);border:1px solid #18382a30}
+.btn.line:hover{background:var(--sunk)}
+.btn.sm{padding:7px 12px;font-size:13.5px;border-radius:8px}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.tag.sun{background:var(--sun-soft);color:var(--sun-ink)}
+.tag.leaf{background:var(--leaf-soft);color:var(--leaf)}
+.tag.lake{background:var(--lake-soft);color:var(--lake)}
+.tag.rose{background:var(--rose-soft);color:var(--rose)}
+.field{display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--muted)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.check{display:flex;gap:9px;align-items:center;font-size:14.5px;font-weight:600;color:var(--text)}
+.check input{width:18px;height:18px;accent-color:var(--sun-deep)}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:all .25s ease;z-index:80;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Demo switcher */
+.demobar{background:#fff4cc;color:#5c4100;font-size:13.5px}
+.demobar .wrap{display:flex;align-items:center;gap:12px;padding-block:7px;flex-wrap:wrap}
+.demobar b{font-weight:800}
+.switch{display:flex;background:#fff;border-radius:999px;padding:3px;gap:2px;margin-left:auto;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.switch a{padding:5px 13px;border-radius:999px;color:#5c4100;font-weight:700;text-decoration:none;font-size:13px;white-space:nowrap}
+.switch a[aria-current="page"]{background:var(--ink);color:#fff}
+
+/* ===================== GUEST SITE ===================== */
+.announce{background:var(--leaf);color:#fff;text-align:center;font-weight:600;font-size:14px}
+.announce .wrap{padding-block:8px}
+.sitehead{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:#fff}
+.sitehead .wrap{display:flex;align-items:center;gap:18px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{display:block;font-family:var(--f-display);font-size:20px;line-height:1.1}
+.brand small{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.snav{display:flex;gap:2px;margin-left:auto}
+.snav a{color:var(--text);text-decoration:none;font-weight:700;font-size:14px;padding:8px 11px;border-radius:8px}
+.snav a:hover{background:var(--sunk)}
+.hero{background:radial-gradient(900px 520px at 90% -10%,#ffe9a3 0%,rgba(255,233,163,0) 60%),radial-gradient(700px 500px at -5% 110%,#d8eefc 0%,rgba(216,238,252,0) 60%),#fff}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;align-items:center;padding-block:56px 70px}
+.hero h1{font-size:clamp(40px,5.6vw,72px);letter-spacing:-.015em;max-width:13ch}
+.hero h1 mark{background:linear-gradient(transparent 58%,var(--sun) 58%,var(--sun) 92%,transparent 92%);color:inherit;padding:0 .06em}
+.hero .lede{font-size:18px;color:#4a5a50;max-width:46ch;margin-top:16px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--muted)}
+.stats b{display:block;font-family:var(--f-display);font-size:26px;color:var(--ink)}
+.mosaic{position:relative;display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:min(520px,52vw);min-height:380px}
+.mosaic figure{margin:0;border-radius:22px;overflow:hidden;box-shadow:0 18px 40px rgba(24,56,42,.18);background:#ddd}
+.mosaic figure:first-child{grid-row:span 2}
+.mosaic img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.mosaic figure:hover img{transform:scale(1.05)}
+.chip{position:absolute;display:flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:9px 14px;font-weight:800;font-size:13.5px;color:var(--ink);box-shadow:0 10px 28px rgba(24,56,42,.18);animation:bob 5s ease-in-out infinite;white-space:nowrap}
+.chip i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px}
+.chip.c1{left:-18px;top:14%}.chip.c1 i{background:#ffe9a3}
+.chip.c2{right:-12px;top:46%;animation-delay:-1.6s}.chip.c2 i{background:#d8eefc}
+.chip.c3{left:30%;bottom:-16px;animation-delay:-3.2s}.chip.c3 i{background:#d9f2e2}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.finder{background:#fff;border-block:1px solid var(--line);box-shadow:0 8px 24px rgba(24,56,42,.05)}
+.finder .wrap{display:flex;gap:18px 26px;align-items:flex-end;flex-wrap:wrap;padding-block:18px}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.stepper button{border:0;background:var(--sunk);width:38px;height:40px;font-size:18px;font-weight:700}
+.stepper output{min-width:46px;text-align:center;font-family:var(--f-mono);font-weight:500}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pills button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:700}
+.pills button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+section.s{padding-block:64px}
+section.s.tint-sun{background:#fff9e6}
+section.s.tint-lake{background:#eef6fb}
+section.s.tint-leaf{background:#f0f7f1}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 24px;flex-wrap:wrap;margin-bottom:26px}
+.shead p{color:var(--muted);max-width:60ch;margin-top:8px;font-size:16.5px}
+
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(24,56,42,.08);display:flex;flex-direction:column;border:1px solid #eef1ec}
+.card .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#ddd}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.card:hover .ph img{transform:scale(1.04)}
+.card .ph .tag{position:absolute;left:12px;top:12px;background:#fff;color:var(--ink);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.card .bd{padding:16px 18px 18px;display:grid;gap:8px;flex:1;align-content:start}
+.card .meta{display:flex;flex-wrap:wrap;gap:6px}
+.card .price{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:4px}
+.card .price b{font-family:var(--f-display);font-size:24px;color:var(--ink)}
+.card .acts{display:flex;gap:8px;padding:0 18px 18px}
+.card .acts .btn{flex:1}
+.match{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--leaf);background:var(--leaf-soft);padding:3px 9px;border-radius:999px}
+.why{margin:0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:2px}
+
+/* Map */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start}
+.mapbox{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 16px 40px rgba(24,56,42,.16);background:#2c3b2a}
+.mapbox img{display:block;width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;width:44px;height:44px;display:grid;place-items:center}
+.pin::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--sun);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45);transition:transform .2s}
+.pin::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;border:2px solid var(--sun);animation:ping 2.2s ease-out infinite}
+.pin.other::before{background:#fff;width:12px;height:12px;border-width:2px;border-color:var(--ink)}
+.pin.other::after{display:none}
+.pin.amen::before{background:#5fc3d8}
+.pin.amen::after{border-color:#5fc3d8}
+.pin:hover::before,.pin.on::before{transform:scale(1.35)}
+.pin.on::before{background:var(--rose)}
+@keyframes ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.8);opacity:0}}
+.mapcard{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(24,56,42,.1);border:1px solid #eef1ec}
+.mapcard img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.mapcard .bd{padding:18px;display:grid;gap:10px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:2px solid #fff;box-shadow:0 0 0 1px #0002}
+
+/* Booking */
+.bookgrid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:22px;align-items:start}
+.panel{background:#fff;border-radius:18px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(24,56,42,.06)}
+.panel.pad{padding:20px}
+.calhead{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line)}
+.cal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:18px}
+.month h4{font-size:18px;margin-bottom:10px}
+.dow,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dow span{font-size:11px;font-weight:800;color:var(--muted);text-align:center;letter-spacing:.06em}
+.day{aspect-ratio:1;max-width:100%;border:0;border-radius:9px;background:var(--sunk);font-family:var(--f-mono);font-size:13px;display:grid;place-items:center;padding:0}
+.day:hover:not(:disabled){outline:2px solid var(--sun-deep)}
+.day:disabled{background:transparent;color:#b8c2bb;cursor:default}
+.day.taken{background:#e6e9e4;color:#9aa49c;text-decoration:line-through}
+.day.blocked{background:repeating-linear-gradient(45deg,#eceee9,#eceee9 4px,#e0e4dd 4px,#e0e4dd 8px);color:#9aa49c}
+.day.in{background:var(--sun-soft);color:var(--sun-ink);font-weight:600}
+.day.edge{background:var(--sun-deep);color:#1c1406;font-weight:700}
+.day.blank{visibility:hidden}
+.calleg{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:0 18px 18px}
+.calleg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.quote{display:grid;gap:14px}
+.qlines{border-top:1px dashed var(--line);padding-top:12px;display:grid;gap:7px;font-size:14.5px}
+.ql{display:flex;justify-content:space-between;gap:10px}
+.ql span:last-child{font-family:var(--f-mono);white-space:nowrap}
+.qtotal{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:12px}
+.qtotal b{font-family:var(--f-display);font-size:32px;color:var(--ink)}
+.done{background:var(--leaf-soft);color:var(--leaf);border-radius:12px;padding:14px;font-size:14px;font-weight:600}
+
+/* Amenities */
+.amen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.am{background:#fff;border-radius:16px;padding:16px;display:grid;gap:6px;border:1px solid #eef1ec}
+.am .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--sun-soft);color:var(--sun-ink)}
+.am .ic svg{width:20px;height:20px}
+.am b{font-size:15px;color:var(--ink)}
+.am span{font-size:13.5px;color:var(--muted)}
+.feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;align-items:center;margin-top:34px}
+.feature figure{margin:0;border-radius:20px;overflow:hidden;box-shadow:0 14px 34px rgba(24,56,42,.14);aspect-ratio:4/3}
+.feature figure img{width:100%;height:100%;object-fit:cover;display:block}
+.pricelist{display:grid;gap:0;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.pricelist div{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;font-size:14.5px}
+.pricelist div+div{border-top:1px solid var(--line)}
+.pricelist span:last-child{font-family:var(--f-mono);font-weight:500;color:var(--ink)}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:200px;gap:12px}
+.gallery figure{margin:0;border-radius:16px;overflow:hidden;background:#ddd}
+.gallery figure.big{grid-column:span 2;grid-row:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.gallery figure:hover img{transform:scale(1.05)}
+
+/* Directions + footer */
+.dir{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.steps{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:15px}
+.steps li b{width:28px;height:28px;border-radius:50%;background:var(--sun);color:#1c1406;display:grid;place-items:center;font-size:13px}
+.copyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.foot{background:var(--ink);color:#d8e4dc;padding-block:40px 50px}
+.foot .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px}
+.foot b{color:#fff;font-family:var(--f-display);font-size:20px}
+
+/* Cabin drawer */
+.scrim{position:fixed;inset:0;background:rgba(15,28,20,.45);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:#fff;z-index:61;transform:translateX(102%);transition:transform .3s ease;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.on{transform:none}
+.drawer .hero-ph{position:relative;aspect-ratio:16/10;background:#ddd}
+.drawer .hero-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.drawer .x{position:absolute;right:max(14px,env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));width:38px;height:38px;border-radius:50%;border:0;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2);font-size:20px;line-height:1}
+.drawer .bd{padding:22px 24px 30px;display:grid;gap:16px}
+.ratetab{width:100%;border-collapse:collapse;font-size:14.5px}
+.ratetab td{padding:9px 0;border-bottom:1px solid var(--line)}
+.ratetab td:last-child{text-align:right;font-family:var(--f-mono);font-weight:500;color:var(--ink)}
+.amlist{display:flex;flex-wrap:wrap;gap:6px}
+
+/* Concierge */
+.bubble{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;align-items:center;gap:10px;border:0;background:var(--ink);color:#fff;padding:12px 18px 12px 14px;border-radius:999px;font-weight:700;box-shadow:0 12px 30px rgba(24,56,42,.35)}
+.bubble .dot{width:30px;height:30px;border-radius:50%;background:var(--sun);display:grid;place-items:center;color:#1c1406}
+.chat{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(82px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100% - 36px));height:min(540px,calc(100% - 120px));background:#fff;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.25);z-index:51;display:flex;flex-direction:column;overflow:hidden}
+.chat header{background:var(--ink);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.chat header b{font-family:var(--f-display);font-size:17px}
+.chat header small{display:block;color:#b9cbbf;font-size:12px}
+.chat header button{margin-left:auto;background:transparent;border:0;color:#fff;font-size:20px}
+.log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#fbfcf8}
+.msg{max-width:85%;padding:9px 12px;border-radius:14px;font-size:14px;white-space:pre-line}
+.msg.bot{background:#fff;border:1px solid var(--line);border-top-left-radius:4px}
+.msg.me{background:var(--lake);color:#fff;align-self:flex-end;border-top-right-radius:4px}
+.qchips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px 0;background:#fbfcf8}
+.qchips button{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:700}
+.chat form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+
+/* ===================== OWNER BACK END ===================== */
+.adm{background:#f6f8fa;min-height:100vh;color:#1f2328}
+.atop{background:#fff;border-bottom:1px solid #d0d7de;position:sticky;top:env(safe-area-inset-top,0px);z-index:30}
+.atop .wrap{display:flex;align-items:center;gap:10px 12px;padding-block:10px;max-width:1280px;flex-wrap:wrap}
+.burger{width:34px;height:34px;border:1px solid #d0d7de;border-radius:8px;background:#fff;display:grid;place-items:center}
+.crumb{font-size:15px;color:#1f2328}
+.crumb b{font-weight:700}
+.crumb span{color:#656d76}
+.atabs{background:#fff;border-bottom:1px solid #d0d7de}
+.atabs .wrap{display:flex;gap:2px;overflow-x:auto;max-width:1280px;scrollbar-width:none}
+.atabs button{display:flex;align-items:center;gap:7px;background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;font-weight:600;font-size:14px;color:#656d76;white-space:nowrap}
+.atabs button svg{width:16px;height:16px}
+.atabs button[aria-selected="true"]{color:#1f2328;border-bottom-color:#fd8c73}
+.atabs .cnt{background:#eaeef2;border-radius:999px;font-size:11.5px;padding:0 7px;color:#1f2328}
+.abody .wrap{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:24px;padding-block:24px 60px;max-width:1280px}
+.abox{background:#fff;border:1px solid #d0d7de;border-radius:10px}
+.abox+.abox{margin-top:16px}
+.abox>header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid #d0d7de;background:#f6f8fa;border-radius:10px 10px 0 0;flex-wrap:wrap}
+.abox>header h3{font-family:var(--f-body);font-size:15px;font-weight:700;color:#1f2328}
+.abox .in{padding:16px}
+.aside{display:grid;gap:16px;align-content:start}
+.aside h5{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#656d76}
+.kv{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:5px 0}
+.kv span:last-child{font-family:var(--f-mono);font-weight:500}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#656d76;font-weight:700;padding:9px 12px;border-bottom:1px solid #d0d7de;white-space:nowrap;background:#f6f8fa}
+td{padding:10px 12px;border-bottom:1px solid #eaeef2;vertical-align:middle;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.st{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;display:inline-block}
+.st.new{background:#fff8c5;color:#7d4e00}
+.st.confirmed{background:#dafbe1;color:#1a7f37}
+.st.cancelled{background:#ffebe9;color:#cf222e}
+.st.done{background:#eaeef2;color:#57606a}
+.ex{font-size:11px;font-weight:700;color:#8250df;background:#fbefff;border-radius:999px;padding:1px 7px;margin-left:6px}
+.cabrow{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px;border-top:1px solid #eaeef2}
+.cabrow:first-child{border-top:0}
+.cabrow img{width:120px;height:90px;object-fit:cover;border-radius:8px}
+.cabrow .fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cabrow .fields .wide{grid-column:1/-1}
+.cabrow .foot2{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;grid-column:1/-1}
+.small{font-size:12.5px;color:#656d76}
+.adrawer{position:fixed;inset:0 auto 0 0;width:280px;background:#fff;border-right:1px solid #d0d7de;z-index:62;transform:translateX(-102%);transition:transform .25s;padding:calc(16px + env(safe-area-inset-top,0px)) 14px 16px max(14px,env(safe-area-inset-left,0px));box-shadow:8px 0 30px rgba(0,0,0,.1)}
+.adrawer.on{transform:none}
+.adrawer a,.adrawer button.lnk{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;padding:9px 10px;border-radius:8px;color:#1f2328;text-decoration:none;font-size:14.5px;font-weight:500}
+.adrawer a:hover,.adrawer button.lnk:hover{background:#f6f8fa}
+.blk{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #eaeef2;font-size:14px}
+.inbox-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:12px;padding:14px 16px;border-top:1px solid #eaeef2;align-items:start;cursor:pointer;background:#fff;border-left:0;border-right:0;border-bottom:0;text-align:left;width:100%}
+.inbox-item:first-child{border-top:0}
+.inbox-item .u{width:9px;height:9px;border-radius:50%;background:#0969da;margin-top:6px}
+.inbox-item.read .u{background:transparent}
+.inbox-item b{font-size:14.5px}
+.inbox-item p{font-size:13.5px;color:#656d76;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-hero{border:1px solid #d0d7de;border-radius:10px;padding:20px;background:radial-gradient(500px 300px at 90% -10%,#ffe9a3,rgba(255,233,163,0) 60%),#fff}
+.preview-hero h1{font-size:28px;max-width:16ch}
+.livebadge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#1a7f37}
+.livebadge i{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(0,0,0,.06)}
+.ovgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.ov{background:#fff;border:1px solid #d0d7de;border-radius:10px;padding:14px 16px}
+.ov b{display:block;font-size:26px;font-family:var(--f-display);color:#1f2328}
+.ov span{font-size:13px;color:#656d76}
+
+/* ===================== PLAN ===================== */
+.planhero{background:radial-gradient(800px 500px at 85% -20%,#ffe9a3,rgba(255,233,163,0) 60%),#fff;border-bottom:1px solid var(--line)}
+.planhero .wrap{padding-block:56px 46px;display:grid;gap:16px}
+.planhero h1{font-size:clamp(36px,5vw,60px);max-width:18ch}
+.planhero p{font-size:18px;color:var(--muted);max-width:60ch}
+.tryit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:10px}
+.try{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:6px}
+.try b{color:var(--ink);font-size:15.5px}
+.try span{font-size:14px;color:var(--muted)}
+.try .n{width:28px;height:28px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-weight:800;color:#1c1406;font-size:13px}
+.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.group{background:#fff;border-radius:18px;padding:20px 22px;border:1px solid #eef1ec;box-shadow:0 8px 24px rgba(24,56,42,.05)}
+.group header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.group .gi{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--sun-soft);color:var(--sun-ink);flex:none}
+.group .gi svg{width:20px;height:20px}
+.group ul{margin:0;padding-left:18px;display:grid;gap:7px;font-size:14.5px}
+.group li::marker{color:var(--sun-deep)}
+.group li b{color:var(--ink)}
+.group.wide{grid-column:1/-1}
+.fixes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 26px}
+.fix{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:14.5px}
+.fix svg{width:17px;height:17px;color:var(--rose);margin-top:3px}
+.timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.tl{padding:18px;border-right:1px solid var(--line)}
+.tl:last-child{border-right:0}
+.tl .when{font-family:var(--f-mono);font-size:12.5px;color:var(--sun-ink);font-weight:500}
+.tl h3{font-size:18px;margin:4px 0 6px}
+.tl p{font-size:14px;color:var(--muted)}
+.tl.now{background:var(--sun-soft)}
+.care{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+
+@media (max-width:980px){
+  .hero .wrap,.mapgrid,.bookgrid,.dir,.feature{grid-template-columns:minmax(0,1fr)}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .amen,.care{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .abody .wrap{grid-template-columns:minmax(0,1fr)}
+  .timeline{grid-template-columns:minmax(0,1fr)}
+  .tl{border-right:0;border-bottom:1px solid var(--line)}
+  .tl:last-child{border-bottom:0}
+  .groups,.fixes,.tryit{grid-template-columns:minmax(0,1fr)}
+  .snav{display:none}
+  .sitehead .btn{margin-left:auto}
+  .mosaic{height:380px;min-height:0}
+  .chip.c1{left:8px}.chip.c2{right:8px}
+}
+@media (max-width:640px){
+  .cards,.amen,.care{grid-template-columns:minmax(0,1fr)}
+  .cal{grid-template-columns:minmax(0,1fr)}
+  .ovgrid{grid-template-columns:minmax(0,1fr)}
+  .cabrow{grid-template-columns:minmax(0,1fr)}
+  .cabrow img{width:100%;height:160px}
+  .cabrow .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .row3{grid-template-columns:minmax(0,1fr)}
+  .mosaic{height:300px;gap:10px}
+  .chip{font-size:12px;padding:7px 11px}.chip.c3{display:none}
+  .stats{gap:14px}.stats>div{flex:1;min-width:0;font-size:12.5px}.stats b{font-size:19px}
+  section.s{padding-block:46px}
+  .gallery{grid-auto-rows:150px}
+  .demobar .switch{margin-left:0;width:100%;justify-content:space-between}
+  .bubble span.lbl{display:none}
+  .bubble{padding:12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="demobar"><div class="wrap">
+  <span><b>Demo for Sandy</b> by Codember. Try booking a stay, then open the owner side to see it arrive.</span>
+  <nav class="switch" aria-label="Demo views">
+    <a href="#site" data-view="site">Guest website</a>
+    <a href="#owner" data-view="owner">Owner back end</a>
+    <a href="#plan" data-view="plan">The plan</a>
+  </nav>
+</div></div>
+
+<!-- ===================== GUEST SITE ===================== -->
+<div id="v-site">
+  <div class="announce" id="announce" hidden><div class="wrap" id="announceText"></div></div>
+  <header class="sitehead"><div class="wrap">
+    <a class="brand" href="#site" aria-label="Yellow Rose Cabin home">
+      <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="14" r="10" fill="#ffd34d"/><path d="M16 7c3 2 4 5 1 8-3 2-6 0-5-3 1-2 4-2 4 0" fill="none" stroke="#7a5200" stroke-width="1.7" stroke-linecap="round"/><path d="M16 24v6M16 27c-2-2-5-2-6-1" stroke="#2d7a4f" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      <span><b>Yellow Rose Cabin</b><small>Bed and Breakfast &middot; Goodrich, Texas</small></span>
+    </a>
+    <nav class="snav" aria-label="Site sections">
+      <a href="#cabins" data-jump="cabins">Cabins</a><a href="#map" data-jump="map">Property map</a><a href="#amenities" data-jump="amenities">Fishing and fun</a><a href="#gallery" data-jump="gallery">Photos</a><a href="#directions" data-jump="directions">Directions</a>
+    </nav>
+    <a class="btn sun" href="#book" data-jump="book">Book now</a>
+  </div></header>
+
+  <section class="hero"><div class="wrap">
+    <div>
+      <div class="eyebrow">Goodrich, Texas &middot; Spring-fed lake</div>
+      <h1 id="heroHead" style="margin-top:14px">Come relax with us in the <mark>piney woods.</mark></h1>
+      <p class="lede" id="heroSub">Cozy cabins, a lake house, and RV sites on a quiet 30-acre lake. Fish off your own pier, swim in the pool, and book your stay in two minutes.</p>
+      <div class="ctas"><a class="btn sun" href="#find" data-jump="find">Find your cabin</a><a class="btn line" href="#map" data-jump="map">Explore the property</a></div>
+      <div class="stats"><div><b>30 acres</b>spring-fed lake</div><div><b>Free boats</b>paddle and Jon boats</div><div><b id="fromPrice">From $50</b>a night</div></div>
+    </div>
+    <div class="mosaic">
+      <figure><img src="photos/hero.webp" alt="Sunset over the lake from the pier"></figure>
+      <figure><img src="photos/yellowrose.webp" alt="The Yellow Rose cabin on the lawn"></figure>
+      <figure><img src="photos/campshack.webp" alt="Camp Shack under string lights at night"></figure>
+      <span class="chip c1"><i>&#9733;</i>Private piers</span>
+      <span class="chip c2"><i>&#9728;</i>In-ground pool</span>
+      <span class="chip c3"><i>&#10003;</i>Pets welcome</span>
+    </div>
+  </div></section>
+
+  <div class="finder" id="find"><div class="wrap">
+    <div class="field">Guests<div class="stepper"><button type="button" data-step="-1" aria-label="Fewer guests">&minus;</button><output id="fGuests">2</output><button type="button" data-step="1" aria-label="More guests">+</button></div></div>
+    <label class="check" style="padding-bottom:10px"><input type="checkbox" id="fPets"> Bringing a pet</label>
+    <div class="field">What's the trip?<div class="pills" id="trip">
+      <button type="button" data-trip="couple" aria-pressed="true">Couples getaway</button><button type="button" data-trip="fishing" aria-pressed="false">Fishing</button><button type="button" data-trip="family" aria-pressed="false">Family</button><button type="button" data-trip="budget" aria-pressed="false">Budget</button><button type="button" data-trip="event" aria-pressed="false">Retreat or event</button></div></div>
+  </div></div>
+
+  <section class="s" style="padding-top:34px"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Your best fits</div><h2 id="matchHead" style="margin-top:6px">Cabins for a couples getaway</h2></div></div>
+    <div class="cards" id="matches"></div>
+  </div></section>
+
+  <section class="s tint-lake" id="cabins"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Stay with us</div><h2 style="margin-top:6px">Every cabin, side by side</h2><p>Each one is a few steps from the water. Tap a cabin for photos, rates, and what's inside.</p></div></div>
+    <div class="cards" id="allCabins"></div>
+  </div></section>
+
+  <section class="s" id="map"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Find your way around</div><h2 style="margin-top:6px">The whole property from above</h2><p>Tap a marker to see what's there. Gold markers are cabins you can book online right now.</p></div></div>
+    <div class="mapgrid">
+      <div>
+        <div class="mapbox" id="mapbox"><img src="photos/map.webp" alt="Aerial photo of the Yellow Rose Cabin property with cabin labels" width="600" height="509"></div>
+        <div class="legend"><span><i style="background:#ffd34d"></i>Book online</span><span><i style="background:#5fc3d8"></i>Amenity</span><span><i style="background:#fff;box-shadow:0 0 0 2px #18382a"></i>Call to ask</span></div>
+      </div>
+      <div class="mapcard" id="mapcard"></div>
+    </div>
+  </div></section>
+
+  <section class="s tint-sun" id="book"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Check dates</div><h2 style="margin-top:6px">See what's open and book it</h2><p>Pick a cabin, tap your check-in day, then your check-out day. Your total updates with tax and fees included.</p></div></div>
+    <div class="bookgrid">
+      <div class="panel">
+        <div class="calhead">
+          <label class="field" style="flex:1;min-width:220px">Cabin<select id="bkCabin"></select></label>
+          <button class="btn line sm" id="clearDates" type="button">Clear dates</button>
+        </div>
+        <div class="cal" id="cal"></div>
+        <div class="calleg"><span><i style="background:#f1f4ee"></i>Open</span><span><i style="background:#e6e9e4"></i>Booked</span><span><i style="background:repeating-linear-gradient(45deg,#eceee9,#eceee9 3px,#e0e4dd 3px,#e0e4dd 6px)"></i>Closed</span><span><i style="background:#e3a517"></i>Your stay</span></div>
+      </div>
+      <div class="panel pad quote" id="quotePanel">
+        <div><h3 id="qTitle">Your stay</h3><p class="muted" id="qDates" style="font-size:14.5px;margin-top:4px">Tap a check-in day, then a check-out day.</p></div>
+        <div class="row2">
+          <label class="field">Guests<input type="number" id="bkGuests" min="1" value="2"></label>
+          <label class="field">Pets<input type="number" id="bkPets" min="0" value="0"></label>
+        </div>
+        <label class="check" id="bfWrap"><input type="checkbox" id="bkBreakfast"> Add breakfast</label>
+        <div class="qlines" id="qLines"></div>
+        <div class="qtotal"><span class="muted">Total with tax</span><b class="mono" id="qTotal">$0</b></div>
+        <form id="guestForm" class="quote" hidden>
+          <label class="field">Your name<input type="text" id="gName" autocomplete="name" required></label>
+          <label class="field">Phone or email<input type="text" id="gContact" required></label>
+          <button class="btn sun" type="submit" id="reserveBtn">Reserve these dates</button>
+          <p class="small muted" style="font-size:12.5px">Demo: no card is charged. The live site takes payment here.</p>
+        </form>
+        <div id="reserveMsg"></div>
+        <p class="muted" style="font-size:13px">Cancel 7 or more days before check-in for a refund minus 10%, or a credit good for one year.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="s" id="amenities"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Things to do</div><h2 style="margin-top:6px">Fish, swim, float, repeat</h2><p>Boats are free for every guest. Bring your rod or rent one from us.</p></div></div>
+    <div class="amen" id="amenGrid"></div>
+    <div class="feature">
+      <figure><img src="photos/fish.webp" alt="A guest holding a fish caught on the lake"></figure>
+      <div>
+        <h3 style="font-size:28px">Fishing on our spring-fed lake</h3>
+        <p class="muted" style="margin-top:8px;font-size:16px">Cast from your private pier or take a Jon boat out to the cove. Overnight guests fish free.</p>
+        <div class="pricelist">
+          <div><span>Day guest fishing pass (age 4+)</span><span>$10 / day</span></div>
+          <div><span>Rod and reel rental</span><span>$7 / day</span></div>
+          <div><span>Rod and reel, 2 days / week</span><span>$10 / $25</span></div>
+          <div><span>Trolling motor rental</span><span>$25 / day</span></div>
+          <div><span>Worms</span><span>$5.75</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="feature">
+      <div>
+        <h3 style="font-size:28px">The pool, the porch, the fire pit</h3>
+        <p class="muted" style="margin-top:8px;font-size:16px">An in-ground pool in a park-like setting, BBQ pits and picnic tables, and evenings by the fire.</p>
+        <div class="pricelist">
+          <div><span>Firewood bundle</span><span>$10</span></div>
+          <div><span>Large bag of charcoal</span><span>$12</span></div>
+          <div><span>Charcoal starter</span><span>$7</span></div>
+          <div><span>Fire starters</span><span>$1 each</span></div>
+        </div>
+      </div>
+      <figure><img src="photos/pool.webp" alt="The in-ground pool on the grounds"></figure>
+    </div>
+  </div></section>
+
+  <section class="s tint-leaf" id="gallery"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Photos</div><h2 style="margin-top:6px">A look around</h2></div></div>
+    <div class="gallery">
+      <figure class="big"><img src="photos/hero.webp" alt="Sunset over the lake"></figure>
+      <figure><img src="photos/lakehouse.webp" alt="The Lake House"></figure>
+      <figure><img src="photos/pool.webp" alt="The pool"></figure>
+      <figure><img src="photos/campshack.webp" alt="Camp Shack at night"></figure>
+      <figure><img src="photos/fish.webp" alt="A catch from the lake"></figure>
+      <figure><img src="photos/cowboy.webp" alt="Cowboy Casa porch"></figure>
+      <figure><img src="photos/barndo.webp" alt="Inside the Barndo"></figure>
+      <figure><img src="photos/rv.webp" alt="Covered RV site"></figure>
+      <figure><img src="photos/yellowrose.webp" alt="The Yellow Rose"></figure>
+    </div>
+  </div></section>
+
+  <section class="s" id="directions"><div class="wrap dir">
+    <div>
+      <div class="eyebrow">Getting here</div>
+      <h2 style="margin-top:6px">Just south of Livingston</h2>
+      <ol class="steps">
+        <li><b>1</b><span>In Goodrich, go east on FM 2665 for 2.1 miles.</span></li>
+        <li><b>2</b><span>Turn right on Marceaux Lane.</span></li>
+        <li><b>3</b><span>Go half a mile to Yellow Rose Lane, on your right.</span></li>
+      </ol>
+      <p class="muted" style="margin-top:14px">Livingston is about 10 miles away for groceries and some of the best home cooking around.</p>
+    </div>
+    <div class="panel pad" style="display:grid;gap:14px;align-content:start">
+      <div><div class="small muted" style="font-weight:700">ADDRESS</div><div class="copyrow"><b style="font-size:17px;color:var(--ink)">620 Marceaux Lane, Goodrich, TX 77335</b><button class="btn line sm" data-copy="620 Marceaux Lane, Goodrich, TX 77335" type="button">Copy</button></div></div>
+      <div><div class="small muted" style="font-weight:700">PHONE</div><div class="copyrow"><b style="font-size:17px;color:var(--ink)">(936) 329-4333</b><button class="btn line sm" data-copy="(936) 329-4333" type="button">Copy</button></div></div>
+      <div><div class="small muted" style="font-weight:700">MAIL</div><b style="color:var(--ink)">PO Box 83, Goodrich, TX 77335</b></div>
+      <a class="btn ink" href="https://maps.google.com/?q=620+Marceaux+Ln,+Goodrich,+TX+77335" target="_blank" rel="noopener">Open in Google Maps</a>
+    </div>
+  </div></section>
+
+  <footer class="foot"><div class="wrap">
+    <div><b>Yellow Rose Cabin</b><p style="margin-top:6px">Bed and Breakfast &middot; 620 Marceaux Lane, Goodrich, TX</p><p>Gift certificates available. All prices before 13% tax.</p></div>
+    <div style="text-align:right"><p>Site built and cared for by Codember</p></div>
+  </div></footer>
+
+  <button class="bubble" id="bubble" type="button" aria-expanded="false"><span class="dot">?</span><span class="lbl">Questions? Ask us</span></button>
+  <div class="chat" id="chat" hidden role="dialog" aria-label="Ask Yellow Rose Cabin">
+    <header><span class="dot" style="width:32px;height:32px;border-radius:50%;background:#ffd34d;display:grid;place-items:center;color:#1c1406;font-weight:800">Y</span><div><b>Yellow Rose helper</b><small>Answers right away, any hour</small></div><button type="button" id="chatClose" aria-label="Close">&times;</button></header>
+    <div class="log" id="log" aria-live="polite"></div>
+    <div class="qchips" id="qchips"></div>
+    <form id="chatForm"><label for="chatIn" hidden>Your question</label><input type="text" id="chatIn" placeholder="Ask about cabins, fishing, pets..." autocomplete="off"><button class="btn ink sm" type="submit">Send</button></form>
+  </div>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true"></aside>
+</div>
+
+<!-- ===================== OWNER BACK END ===================== -->
+<div id="v-owner" class="adm" hidden>
+  <div class="atop"><div class="wrap">
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="14" r="10" fill="#ffd34d"/><path d="M16 7c3 2 4 5 1 8-3 2-6 0-5-3 1-2 4-2 4 0" fill="none" stroke="#7a5200" stroke-width="1.7" stroke-linecap="round"/></svg>
+    <div class="crumb"><span>yellowrose</span> / <b id="crumb">Overview</b></div>
+    <span class="livebadge" id="liveBadge" style="margin-left:auto"><i></i><span id="liveText">Connecting</span></span>
+    <a class="btn line sm" href="#site">View website</a>
+  </div></div>
+  <div class="atabs"><div class="wrap" role="tablist" id="atabs"></div></div>
+  <div class="abody"><div class="wrap">
+    <main id="amain" style="min-width:0"></main>
+    <aside class="aside" id="aside"></aside>
+  </div></div>
+  <nav class="adrawer" id="adrawer" aria-hidden="true"></nav>
+</div>
+
+<!-- ===================== PLAN ===================== -->
+<div id="v-plan" hidden>
+  <div class="planhero"><div class="wrap">
+    <div class="eyebrow">For Sandy McAllister &middot; Yellow Rose Cabin</div>
+    <h1>Your website, rebuilt and cared for by Codember.</h1>
+    <p>When the current developer's contract ends in January, Codember steps in. You get the new guest site, your own back end to make changes any time, and someone who keeps it all running.</p>
+    <div class="tryit">
+      <div class="try"><span class="n">1</span><b>Book a stay</b><span>On the guest website, pick a cabin and dates, then reserve.</span></div>
+      <div class="try"><span class="n">2</span><b>Open the owner side</b><span>Your booking shows up there right away, ready to confirm.</span></div>
+      <div class="try"><span class="n">3</span><b>Change a rate</b><span>Edit a price or your homepage headline and watch the website update.</span></div>
+    </div>
+    <div class="ctas" style="margin-top:6px"><a class="btn sun" href="#site">Try the guest website</a><a class="btn line" href="#owner">Open the owner back end</a></div>
+  </div></div>
+
+  <section class="s"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Everything included</div><h2 style="margin-top:6px">What you get</h2></div></div>
+    <div class="groups" id="planGroups"></div>
+  </div></section>
+
+  <section class="s tint-sun"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Quick wins</div><h2 style="margin-top:6px">Things we'd fix on the current site</h2><p>Small things guests notice. These get cleaned up in the first week.</p></div></div>
+    <div class="panel pad"><div class="fixes" id="fixes"></div></div>
+  </div></section>
+
+  <section class="s"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">Ongoing care</div><h2 style="margin-top:6px">Codember keeps it running</h2></div></div>
+    <div class="care">
+      <div class="am"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><b>Hosting and speed</b><span>Fast pages, even on rural cell signal.</span></div>
+      <div class="am"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div><b>Security and updates</b><span>Patched and watched so you never think about it.</span></div>
+      <div class="am"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div><b>Daily backups</b><span>Bookings, photos, and settings saved every day.</span></div>
+      <div class="am"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H8l-4 4z"/></svg></div><b>Message Codember</b><span>Ask for a change from your back end. We handle it.</span></div>
+    </div>
+  </div></section>
+
+  <section class="s tint-lake"><div class="wrap">
+    <div class="shead"><div><div class="eyebrow">The handoff</div><h2 style="margin-top:6px">How we get there</h2><p>No gap in service. Guests keep calling the same number while the new pieces come online.</p></div></div>
+    <div class="timeline">
+      <div class="tl now"><div class="when">Nov 2026</div><h3>Demo and plan</h3><p>Walk through this demo together and pick priorities.</p></div>
+      <div class="tl"><div class="when">Dec 2026</div><h3>Access and backup</h3><p>Collect domain, hosting, and site logins. Full backup.</p></div>
+      <div class="tl"><div class="when">Jan 2027</div><h3>Codember takes over</h3><p>Hosting and upkeep move over. Quick fixes go live.</p></div>
+      <div class="tl"><div class="when">Feb 2027</div><h3>New site and back end</h3><p>Online booking, your owner back end, Airbnb and VRBO sync.</p></div>
+      <div class="tl"><div class="when">Spring 2027</div><h3>Tours and AI</h3><p>360&deg; shoot on site, the helper on text and phone, smart rates.</p></div>
+    </div>
+  </div></section>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+const $ = (s, el=document) => el.querySelector(s);
+const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let toastT; function toast(t){ const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove("on"), 2600); }
+
+/* ---------- Default content: Sandy's real cabins and rates from yellowrosecabin.com ---------- */
+const DEFAULT_CONTENT = {
+  headline: "Come relax with us in the piney woods.",
+  highlight: "piney woods.",
+  subhead: "Cozy cabins, a lake house, and RV sites on a quiet 30-acre lake. Fish off your own pier, swim in the pool, and book your stay in two minutes.",
+  announce: "", announceOn: false,
+  fees: { extra: 15, pet: 25, tax: 13 },
+  cabins: {
+    yellowrose: { name:"The Yellow Rose", night:140, bfast:170, weeknight:120, week:675, clean:65, base:4, sleeps:4, pets:true, show:true,
+      blurb:"Peaceful, quiet, rustic and cozy. A king bedroom, a wrap-around porch, and its own pier lit for night fishing. A favorite for honeymoons and anniversaries.",
+      meta:["King bed","Sleeps 4","Private lit pier","Pets welcome"], amen:["Satellite TV","Central heat and AC","Full kitchen","Blender and mixer","Linens and towels","Shampoo and conditioner","Paddle and Jon boats"] },
+    lakehouse: { name:"The Lake House", night:175, bfast:210, weeknight:160, week:895, clean:125, base:8, sleeps:8, pets:true, show:true,
+      blurb:"On a point beside the cove with the best view on the lake. Master suite with a spa tub and private balcony, a covered back porch, and a concrete walk to its own pier.",
+      meta:["3 bedrooms","2.5 baths","Sleeps 8","Spa tub"], amen:["Wi-Fi","Satellite TV","Washer and dryer","Accessible shower","Covered back porch","Iron and board","Paddle and Jon boats"] },
+    cowboy: { name:"Cowboy Casa", night:75, bfast:null, weeknight:50, week:300, clean:25, base:3, sleeps:3, pets:true, show:true,
+      blurb:"A cute little cabin a few steps from the lake. Comes with a Jon boat, oars, and life vest, so bring your fishing gear.",
+      meta:["Sleeps 3","Jon boat included","Pets welcome"], amen:["Satellite TV","Small fridge","Microwave and toaster oven","Crock pot","Small grill","Window AC and heater","Bath house nearby"] },
+    campshack: { name:"Camp Shack", night:75, bfast:null, weeknight:50, week:null, clean:25, base:2, sleeps:4, pets:false, show:true,
+      blurb:"A screened shelter right on the water. Wake up to birds outside the screen, put the coffee on, and watch the bass hit the water. Room for one tent.",
+      meta:["On the water","Room for a tent","String lights"], amen:["Electric and water","Ceiling fan","Small fridge","Double hot plate","Coffee pot and coffee","2 recliners and picnic table","BBQ pit"] },
+    barndo: { name:"The Barndo", night:125, bfast:null, weeknight:null, week:null, clean:75, base:4, sleeps:4, pets:false, show:true,
+      blurb:"A 30 by 40 rustic venue that turns into a cabin in minutes. Queen murphy bed and two twins, right next to the pool, with a boat and a basket of breakfast items.",
+      meta:["Event venue","Sleeps 4","Next to the pool"], amen:["Wi-Fi","Full fridge with ice maker","Full stove","Covered porch","Crock pot and toaster","Coffee pot","Boat and life vests"] }
+  },
+  rv: { covered:625, uncovered:575 }
+};
+const PHOTO = k => `photos/${k}.webp`;
+const clone = o => JSON.parse(JSON.stringify(o));
+const S = { content: clone(DEFAULT_CONTENT), bookings: [], blocks: [], messages: [], db: null, writable: true, connected: false };
+const C = () => S.content;
+const cabinKeys = () => Object.keys(C().cabins);
+const visibleKeys = () => cabinKeys().filter(k => C().cabins[k].show !== false);
+
+/* ---------- Data layer: shared database when available, in-page otherwise ---------- */
+function mergeContent(d){
+  const base = clone(DEFAULT_CONTENT), out = Object.assign(base, d || {});
+  out.cabins = Object.assign(clone(DEFAULT_CONTENT.cabins), d && d.cabins || {});
+  for (const k of Object.keys(out.cabins)) out.cabins[k] = Object.assign({}, DEFAULT_CONTENT.cabins[k] || {}, out.cabins[k]);
+  out.fees = Object.assign({}, DEFAULT_CONTENT.fees, d && d.fees || {});
+  return out;
+}
+async function write(path, data, opts={}){
+  if (S.db && S.writable){
+    try { opts.del ? await S.db.doc(path).delete() : await S.db.doc(path).set(data); return true; }
+    catch(e){ if (e && (e.code === "invalid_argument" || e.code === "not_granted" || e.code === "revoked")) { S.writable = false; setLive(); } }
+  }
+  applyLocal(path, data, opts); return false;
+}
+function applyLocal(path, data, opts){
+  const [col, id] = path.split("/");
+  if (col === "site") { S.content = mergeContent(data); renderAll(); return; }
+  const arr = S[col]; if (!arr) return;
+  const i = arr.findIndex(x => x.id === id);
+  if (opts.del){ if (i >= 0) arr.splice(i,1); }
+  else { const row = Object.assign({id}, data); if (i >= 0) arr[i] = row; else arr.push(row); }
+  renderAll();
+}
+function setLive(){
+  const t = $("#liveText"); if (!t) return;
+  t.textContent = !S.db ? "Preview mode" : !S.writable ? "View only" : S.connected ? "Live, changes save" : "Connecting";
+  $("#liveBadge").style.color = S.db && S.writable && S.connected ? "#1a7f37" : "#9a6700";
+}
+async function connect(){
+  if (!window.claude || !window.claude.use) { setLive(); return; }
+  const db = await window.claude.use("db"); S.db = db; setLive();
+  if (!db) return;
+  try { const u = await window.claude.use("user"); if (u && u.can){ const w = await u.can("data.write"); if (w === false) { S.writable = false; setLive(); } } } catch(e){}
+  const timer = setTimeout(() => { if (!S.connected){ $("#liveText") && ($("#liveText").textContent = "Saved data not reachable yet"); } }, 10000);
+  const ok = () => { S.connected = true; clearTimeout(timer); setLive(); };
+  db.doc("site/content").onSnapshot(s => { if (s.exists) S.content = mergeContent(s.data()); if (!s.metadata.fromCache) ok(); renderAll(); }, () => { clearTimeout(timer); });
+  for (const col of ["bookings","blocks","messages"]){
+    db.collection(col).onSnapshot(q => { S[col] = q.docs.map(d => Object.assign({id:d.id}, d.data())); if (!q.metadata.fromCache) ok(); renderAll(); }, () => {});
+  }
+}
+const newId = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+
+/* ---------- Dates ---------- */
+const today = new Date(); today.setHours(0,0,0,0);
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const nightsOf = (a,b) => { const out = [], d = new Date(a); while (d < b){ out.push(new Date(d)); d.setDate(d.getDate()+1); } return out; };
+const nice = s => parse(s).toLocaleDateString("en-US",{month:"short", day:"numeric"});
+function takenFor(cabin){
+  const taken = new Set(), blocked = new Set();
+  for (const b of S.bookings) if (b.cabin === cabin && b.status !== "cancelled") nightsOf(parse(b.checkIn), parse(b.checkOut)).forEach(d => taken.add(ymd(d)));
+  for (const b of S.blocks) if (b.cabin === cabin || b.cabin === "all") nightsOf(parse(b.from), new Date(parse(b.to).getTime()+864e5)).forEach(d => blocked.add(ymd(d)));
+  return { taken, blocked };
+}
+
+/* ---------- Pricing (Sandy's real rules) ---------- */
+function priceStay(key, ci, co, guests, pets, bfast){
+  const c = C().cabins[key], f = C().fees, ns = nightsOf(ci, co), n = ns.length, lines = []; let lodging = 0;
+  if (bfast && c.bfast){ lodging = n*c.bfast; lines.push([`${n} night${n>1?"s":""} with breakfast x ${money(c.bfast)}`, lodging]); }
+  else {
+    let rem = ns;
+    if (c.week && n >= 7){ const wk = Math.floor(n/7); lodging += wk*c.week; lines.push([`${wk} week${wk>1?"s":""} x ${money(c.week)}`, wk*c.week]); rem = ns.slice(wk*7); }
+    const wkn = rem.filter(d => d.getDay() <= 4).length, other = rem.length - wkn;
+    if (c.weeknight && wkn >= 3){ lodging += wkn*c.weeknight + other*c.night; lines.push([`${wkn} weeknights x ${money(c.weeknight)}`, wkn*c.weeknight]); if (other) lines.push([`${other} weekend night${other>1?"s":""} x ${money(c.night)}`, other*c.night]); }
+    else if (rem.length){ lodging += rem.length*c.night; lines.push([`${rem.length} night${rem.length>1?"s":""} x ${money(c.night)}`, rem.length*c.night]); }
+  }
+  let total = lodging;
+  const extra = Math.max(0, guests - c.base); if (extra){ const v = extra*f.extra*n; total += v; lines.push([`${extra} extra guest${extra>1?"s":""}`, v]); }
+  if (pets && c.pets){ const v = pets*f.pet*n; total += v; lines.push([`${pets} pet${pets>1?"s":""}`, v]); }
+  total += c.clean; lines.push(["Cleaning fee", c.clean]);
+  const tax = total*f.tax/100; lines.push([`Tax (${f.tax}%)`, tax]); total += tax;
+  return { lines, total, n };
+}
+const fromPrice = c => c.weeknight || c.night;
+
+/* ===================== GUEST SITE ===================== */
+function renderHero(){
+  const c = C(), h = c.headline || DEFAULT_CONTENT.headline, hl = c.highlight || "";
+  const i = hl ? h.lastIndexOf(hl) : -1;
+  $("#heroHead").innerHTML = i >= 0 ? esc(h.slice(0,i)) + "<mark>" + esc(hl) + "</mark>" + esc(h.slice(i+hl.length)) : esc(h);
+  $("#heroSub").textContent = c.subhead;
+  $("#announce").hidden = !(c.announceOn && c.announce); $("#announceText").textContent = c.announce || "";
+  const min = Math.min(...visibleKeys().map(k => fromPrice(C().cabins[k])));
+  $("#fromPrice").textContent = "From " + money(isFinite(min) ? min : 50);
+}
+
+const TRIP = {couple:"a couples getaway", fishing:"a fishing trip", family:"a family trip", budget:"a budget stay", event:"a retreat or event"};
+const FIT = {
+  couple:{yellowrose:[32,"King bed, private lit pier, wrap-around porch"], lakehouse:[18,"Spa tub and a private balcony over the lake"], cowboy:[6,"Simple and close to the water"]},
+  fishing:{cowboy:[28,"Jon boat, oars, and life vest included"], yellowrose:[24,"Private pier lit for night fishing"], campshack:[22,"Screened shelter right on the water"], lakehouse:[20,"Sits on a point by the cove"]},
+  family:{lakehouse:[36,"3 bedrooms, 2.5 baths, washer and dryer"], barndo:[14,"Right next to the pool"], yellowrose:[8,"Futons for the kids"]},
+  budget:{cowboy:[30,"Weeknights from $50"], campshack:[28,"Weeknights from $50"], barndo:[8,"Full kitchen and bath"]},
+  event:{barndo:[40,"30 by 40 venue that converts in minutes"], lakehouse:[18,"Room for 8 and big entertaining areas"], yellowrose:[6,"Quiet cabin for the guest of honor"]}
+};
+let fGuests = 2, fTrip = "couple";
+function cabinCard(k, extra){
+  const c = C().cabins[k];
+  return `<article class="card"><div class="ph"><img src="${PHOTO(k)}" alt="${esc(c.name)}" loading="lazy">${extra && extra.badge ? `<span class="tag">${extra.badge}</span>` : ""}</div>
+    <div class="bd"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><h3>${esc(c.name)}</h3>${extra && extra.score ? `<span class="match">${extra.score}% match</span>` : ""}</div>
+    ${extra && extra.why ? `<ul class="why">${extra.why.map(w => `<li>${esc(w)}</li>`).join("")}</ul>` : `<p class="muted" style="font-size:14px">${esc(c.blurb.split(". ")[0])}.</p>`}
+    <div class="meta">${(c.meta||[]).slice(0,3).map(m => `<span class="tag">${esc(m)}</span>`).join("")}</div>
+    <div class="price"><span class="muted" style="font-size:13.5px">from <b>${money(fromPrice(c))}</b> a night</span></div></div>
+    <div class="acts"><button class="btn line sm" type="button" data-open="${k}">See inside</button><button class="btn ink sm" type="button" data-book="${k}">Check dates</button></div></article>`;
+}
+function renderMatches(){
+  const pets = $("#fPets").checked;
+  $("#fGuests").textContent = fGuests;
+  $("#matchHead").textContent = `Cabins for ${TRIP[fTrip]}`;
+  const list = visibleKeys().map(k => {
+    const c = C().cabins[k], f = (FIT[fTrip]||{})[k], why = [];
+    if (fGuests > c.sleeps || (pets && !c.pets)) return null;
+    let s = 58; if (f){ s += f[0]; why.push(f[1]); }
+    if (c.sleeps - fGuests <= 1){ s += 6; why.push(`Right size: sleeps ${c.sleeps}`); } else why.push(`Sleeps up to ${c.sleeps}`);
+    if (pets) why.push(`Pets welcome, ${money(C().fees.pet)} a night`);
+    return {k, s: Math.min(99,s), why};
+  }).filter(Boolean).sort((a,b) => b.s - a.s).slice(0,3);
+  $("#matches").innerHTML = list.length ? list.map(m => cabinCard(m.k, {score:m.s, why:m.why})).join("")
+    : `<div class="panel pad" style="grid-column:1/-1"><h3>That sounds like a group stay</h3><p class="muted" style="margin-top:6px">No single cabin fits ${fGuests} guests${pets?" with pets":""}. Several cabins plus the Barndo work well for reunions and retreats. Send us a note with the helper in the corner and we'll put a group quote together.</p></div>`;
+}
+function renderAllCabins(){
+  $("#allCabins").innerHTML = visibleKeys().map(k => cabinCard(k)).join("") +
+    `<article class="card"><div class="ph"><img src="${PHOTO("rv")}" alt="Covered RV site" loading="lazy"><span class="tag">Monthly</span></div><div class="bd"><h3>RV Sites</h3><p class="muted" style="font-size:14px">Two covered sites and one open site with electric, sewer, water, garbage, and Wi-Fi.</p><div class="price"><span class="muted" style="font-size:13.5px">from <b>${money(C().rv.uncovered)}</b> a month</span></div></div><div class="acts"><button class="btn line sm" type="button" data-askrv>Ask about a site</button></div></article>`;
+}
+
+/* Cabin drawer */
+function openDrawer(k){
+  const c = C().cabins[k];
+  const rate = (l,v) => v ? `<tr><td>${l}</td><td>${money(v)}</td></tr>` : "";
+  $("#drawer").innerHTML = `<div class="hero-ph"><img src="${PHOTO(k)}" alt="${esc(c.name)}"><button class="x" type="button" data-close aria-label="Close">&times;</button></div>
+    <div class="bd"><div><div class="eyebrow">Yellow Rose Cabin</div><h2 style="margin-top:4px">${esc(c.name)}</h2></div>
+    <p style="font-size:16px">${esc(c.blurb)}</p>
+    <div class="amlist">${(c.meta||[]).map(m => `<span class="tag sun">${esc(m)}</span>`).join("")}</div>
+    <div><h3 style="margin-bottom:6px">Rates</h3><table class="ratetab">${rate("Nightly",c.night)}${rate("Nightly with breakfast",c.bfast)}${rate("3 or more weeknights, per night",c.weeknight)}${rate("Weekly (7 nights)",c.week)}${rate("Cleaning fee",c.clean)}</table>
+    <p class="muted" style="font-size:13px;margin-top:8px">Rates for up to ${c.base} guests. Extra guests ${money(C().fees.extra)} a night.${c.pets ? ` Pets ${money(C().fees.pet)} a night each.` : " No pets in this unit."} Plus ${C().fees.tax}% tax.</p></div>
+    <div><h3 style="margin-bottom:8px">What's here</h3><div class="amlist">${(c.amen||[]).map(a => `<span class="tag">${esc(a)}</span>`).join("")}</div></div>
+    <button class="btn sun" type="button" data-book="${k}">Check dates for ${esc(c.name)}</button></div>`;
+  $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); $("#drawer").setAttribute("aria-hidden","false");
+  $("#drawer .x").focus();
+}
+function closeDrawer(){ $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); $("#drawer").setAttribute("aria-hidden","true"); }
+
+/* Property map */
+const PINS = [
+  {k:"lakehouse", x:7.5, y:8.8}, {k:"campshack", x:56.2, y:4.3}, {k:"cowboy", x:38.8, y:18.7}, {k:"yellowrose", x:69, y:34}, {k:"barndo", x:56.3, y:39.7},
+  {k:"pool", x:47, y:31.8, kind:"amen", name:"Pool", text:"In-ground pool in a park-like setting, right beside the Barndo.", photo:"pool"},
+  {k:"rvsites", x:26.7, y:50, kind:"rv", name:"RV Sites", text:"Two covered sites and one open site. Electric, sewer, water, garbage pickup, and Wi-Fi included.", photo:"rv"},
+  {k:"main", x:60, y:22.6, kind:"other", name:"Main House", text:"The main house on the property."},
+  {k:"redrose", x:25.5, y:27, kind:"other", name:"Red Rose", text:"Has a washer and dryer. Call to ask about dates."},
+  {k:"bearshack", x:5.5, y:32.4, kind:"other", name:"Bear Shack", text:"Near the Lake House back porch. Call to ask about dates."},
+  {k:"texan", x:21, y:38, kind:"other", name:"Texan", text:"Call to ask about dates."},
+  {k:"tiki", x:31, y:44.6, kind:"other", name:"Tiki Hut", text:"Call to ask about dates."},
+  {k:"texasrose", x:18.3, y:52, kind:"other", name:"Texas Rose", text:"Call to ask about dates."},
+  {k:"lakerv", x:11.7, y:20, kind:"other", name:"Lake RV Site", text:"An RV site near the water. Call to ask."},
+  {k:"henden", x:82.5, y:82.7, kind:"other", name:"Hen Den", text:"Call to ask about dates."},
+  {k:"bluebird", x:94.3, y:89.4, kind:"other", name:"Blue Bird", text:"Call to ask about dates."}
+];
+let pinOn = "yellowrose";
+function renderMap(){
+  const box = $("#mapbox"); $$(".pin", box).forEach(p => p.remove());
+  for (const p of PINS){
+    if (!p.kind && C().cabins[p.k] && C().cabins[p.k].show === false) continue;
+    const b = document.createElement("button"); b.type = "button"; b.className = "pin " + (p.kind === "amen" ? "amen" : p.kind === "other" ? "other" : "") + (p.k === pinOn ? " on" : "");
+    b.style.left = p.x + "%"; b.style.top = (p.y < 8 ? p.y + 5.4 : p.y - 5.2) + "%"; b.setAttribute("aria-label", p.kind ? p.name : C().cabins[p.k].name); b.dataset.pin = p.k; box.appendChild(b);
+  }
+  const p = PINS.find(x => x.k === pinOn) || PINS[3], card = $("#mapcard");
+  if (!p.kind){ const c = C().cabins[p.k];
+    card.innerHTML = `<img src="${PHOTO(p.k)}" alt="${esc(c.name)}"><div class="bd"><span class="tag sun" style="justify-self:start">Book online</span><h3 style="font-size:24px">${esc(c.name)}</h3><p class="muted">${esc(c.blurb)}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ink sm" data-book="${p.k}" type="button">Check dates, from ${money(fromPrice(c))}</button><button class="btn line sm" data-open="${p.k}" type="button">See inside</button></div></div>`; }
+  else card.innerHTML = `${p.photo ? `<img src="${PHOTO(p.photo)}" alt="${esc(p.name)}">` : ""}<div class="bd"><span class="tag ${p.kind==="other"?"":"lake"}" style="justify-self:start">${p.kind === "other" ? "Call to ask" : p.kind === "rv" ? "Monthly stays" : "Amenity"}</span><h3 style="font-size:24px">${esc(p.name)}</h3><p class="muted">${esc(p.text)}</p>${p.kind === "other" || p.kind === "rv" ? `<div class="copyrow"><b class="mono">(936) 329-4333</b><button class="btn line sm" type="button" data-copy="(936) 329-4333">Copy number</button></div>` : ""}</div>`;
+}
+
+/* Booking */
+let bk = { cabin:"yellowrose", ci:null, co:null };
+function renderBookSelect(){
+  const sel = $("#bkCabin"), cur = bk.cabin;
+  sel.innerHTML = visibleKeys().map(k => `<option value="${k}">${esc(C().cabins[k].name)} (from ${money(fromPrice(C().cabins[k]))} a night)</option>`).join("");
+  if (!visibleKeys().includes(cur)) bk.cabin = visibleKeys()[0];
+  sel.value = bk.cabin;
+}
+function renderCal(){
+  const { taken, blocked } = takenFor(bk.cabin); let html = "";
+  for (let m=0; m<2; m++){
+    const first = new Date(today.getFullYear(), today.getMonth()+m, 1), days = new Date(first.getFullYear(), first.getMonth()+1, 0).getDate();
+    html += `<div class="month"><h4>${first.toLocaleString("en-US",{month:"long",year:"numeric"})}</h4><div class="dow">${"SMTWTFS".split("").map(c=>`<span>${c}</span>`).join("")}</div><div class="days">`;
+    for (let i=0;i<first.getDay();i++) html += `<span class="day blank"></span>`;
+    for (let d=1; d<=days; d++){
+      const dt = new Date(first.getFullYear(), first.getMonth(), d), k = ymd(dt), past = dt < today, t = taken.has(k), bl = blocked.has(k);
+      let cls = "day" + (t ? " taken" : bl ? " blocked" : "");
+      if ((bk.ci && ymd(bk.ci) === k) || (bk.co && ymd(bk.co) === k)) cls += " edge"; else if (bk.ci && bk.co && dt > bk.ci && dt < bk.co) cls += " in";
+      const canCheckout = bk.ci && !bk.co && dt > bk.ci;
+      html += `<button type="button" class="${cls}" data-d="${k}" ${past || ((t||bl) && !canCheckout) ? "disabled" : ""} aria-label="${dt.toDateString()}${t?" booked":bl?" closed":""}">${d}</button>`;
+    }
+    html += `</div></div>`;
+  }
+  $("#cal").innerHTML = html; quote();
+}
+function quote(){
+  const c = C().cabins[bk.cabin]; if (!c) return;
+  $("#qTitle").textContent = c.name;
+  $("#bfWrap").hidden = !c.bfast; if (!c.bfast) $("#bkBreakfast").checked = false;
+  $("#bkPets").disabled = !c.pets; if (!c.pets) $("#bkPets").value = 0;
+  const guests = Math.max(1, Math.min(c.sleeps, +$("#bkGuests").value || 1)), pets = Math.max(0, +$("#bkPets").value || 0);
+  if (!bk.ci || !bk.co){
+    $("#qLines").innerHTML = [["Nightly",c.night],["3+ weeknights",c.weeknight],["Weekly",c.week]].filter(r=>r[1]).map(([a,b]) => `<div class="ql muted"><span>${a}</span><span>${money(b)}</span></div>`).join("");
+    $("#qTotal").textContent = "$0"; $("#qDates").textContent = bk.ci ? "Now tap your check-out day." : "Tap a check-in day, then a check-out day."; $("#guestForm").hidden = true; return;
+  }
+  const q = priceStay(bk.cabin, bk.ci, bk.co, guests, pets, $("#bkBreakfast").checked);
+  $("#qDates").textContent = `${bk.ci.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})} to ${bk.co.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}, ${q.n} night${q.n>1?"s":""}`;
+  $("#qLines").innerHTML = q.lines.map(([a,b]) => `<div class="ql"><span>${esc(a)}</span><span>${money(b)}</span></div>`).join("");
+  $("#qTotal").textContent = money(q.total); $("#guestForm").hidden = false;
+}
+
+/* Concierge */
+const ANSWERS = [
+  [/plan|itinerary|weekend|things to do|what to do/i, "Here's an easy weekend.\nFriday: check in, grill out, catch sunset from the pier.\nSaturday: early fishing from the Jon boat, afternoon at the pool, dinner in Livingston about 10 miles away.\nSunday: coffee on the porch, one more cast, then home."],
+  [/fish|bass|catfish|worm|rod|reel/i, "Fishing is free for overnight guests. Day guests are $10 per person (age 4 and up). Rod and reel rental is $7 a day, $10 for 2 days, or $25 a week. Worms are $5.75. Boats are free, and a trolling motor rents for $25 a day."],
+  [/pet|dog|cat/i, () => `Pets are welcome at ${visibleKeys().filter(k=>C().cabins[k].pets).map(k=>C().cabins[k].name).join(", ")} for ${money(C().fees.pet)} a night per pet. The other cabins and the RV sites are pet free.`],
+  [/direction|where|address|located|get there|map/i, "We're at 620 Marceaux Lane, Goodrich, TX 77335. In Goodrich, go east on FM 2665 for 2.1 miles, turn right on Marceaux Lane, then go half a mile to Yellow Rose Lane on your right."],
+  [/pool|swim/i, "Yes, there's an in-ground pool in a park-like setting right by the Barndo. You can swim in the lake too."],
+  [/breakfast/i, () => `Breakfast is offered at The Yellow Rose (${money(C().cabins.yellowrose.bfast)} a night with breakfast) and The Lake House (${money(C().cabins.lakehouse.bfast)}). The Barndo comes with a basket of small breakfast items.`],
+  [/cancel|refund|change/i, "Cancel 7 or more days before check-in for a refund minus a 10% booking charge, or put the full amount toward another stay within one year. Refunds can take up to 7 business days."],
+  [/wifi|wi-fi|internet|tv/i, "Wi-Fi is at The Lake House, the Barndo, and the RV sites. Most cabins have satellite TV."],
+  [/firewood|charcoal|fire|grill|bbq/i, "Firewood is $10 a bundle, charcoal $12 for a large bag, charcoal starter $7, and fire starters $1 each. BBQ pits and picnic tables are on the grounds."],
+  [/group|retreat|church|scrapbook|reunion|wedding|event|venue|barndo|party/i, "We host church retreats, scrapbooking groups, reunions, birthdays, and business retreats. The Barndo is a 30 by 40 venue. Tap \"Send to Sandy\" with your dates and group size and she'll put a quote together."],
+  [/rv|camper|trailer/i, () => `RV sites rent by the month: covered ${money(C().rv.covered)}, open ${money(C().rv.uncovered)}. Electric, sewer, water, garbage, and Wi-Fi are included.`],
+  [/gift/i, "Gift certificates are available. Send Sandy a note with the amount and she'll set one up."],
+  [/honeymoon|anniversary|romantic|couple/i, "The Yellow Rose is the couples favorite: a king bed, a private lit pier, and a wrap-around porch. The Lake House has a spa tub and a private balcony if you want more room."],
+  [/price|rate|cost|how much|cheap/i, () => `Nightly rates run from ${money(Math.min(...visibleKeys().map(k=>C().cabins[k].night)))} to ${money(Math.max(...visibleKeys().map(k=>C().cabins[k].night)))} before ${C().fees.tax}% tax, with lower rates for 3 or more weeknights. Use Check dates for an exact total.`]
+];
+let lastQ = "";
+function say(t, who, extra){ const d = document.createElement("div"); d.className = "msg " + who; d.textContent = t; if (extra) d.appendChild(extra); $("#log").appendChild(d); $("#log").scrollTop = 1e9; }
+function ask(q){
+  say(q, "me"); lastQ = q;
+  const hit = ANSWERS.find(([re]) => re.test(q));
+  setTimeout(() => {
+    if (hit) { say(typeof hit[1] === "function" ? hit[1]() : hit[1], "bot"); return; }
+    const wrap = document.createElement("div"); wrap.style.cssText = "display:grid;gap:8px;margin-top:8px";
+    wrap.innerHTML = `<input type="text" placeholder="Your name and phone" aria-label="Your name and phone"><button class="btn sun sm" type="button">Send to Sandy</button>`;
+    wrap.querySelector("button").onclick = async () => {
+      const who = wrap.querySelector("input").value.trim() || "Website visitor";
+      const id = newId("m");
+      await write("messages/" + id, { from: who, channel: "Website helper", text: q, at: new Date().toISOString(), read: false });
+      wrap.innerHTML = `<b style="color:var(--leaf)">Sent. Sandy will get back to you soon.</b>`;
+    };
+    say("Good question. I'll pass it to Sandy so she can answer it herself.", "bot", wrap);
+  }, 350);
+}
+
+/* ===================== OWNER BACK END ===================== */
+const ICON = {
+  overview:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>',
+  bookings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  rates:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg>',
+  availability:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>',
+  homepage:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>',
+  inbox:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H8l-4 4z"/></svg>'
+};
+const ATABS = [["overview","Overview"],["bookings","Bookings"],["rates","Cabins and rates"],["availability","Availability"],["homepage","Homepage"],["inbox","Inbox"]];
+let aTab = "overview", bFilter = "upcoming", availCabin = "yellowrose", blkFrom = null, openMsg = null, cancelArm = null;
+const stName = s => ({new:"Needs confirming", confirmed:"Confirmed", cancelled:"Cancelled", done:"Checked out"}[s] || s);
+function upcoming(){ return S.bookings.filter(b => b.status !== "cancelled" && parse(b.checkOut) >= today).sort((a,b) => a.checkIn < b.checkIn ? -1 : 1); }
+function renderOwner(){
+  const unread = S.messages.filter(m => !m.read).length, needs = S.bookings.filter(b => b.status === "new").length;
+  $("#atabs").innerHTML = ATABS.map(([k,l]) => `<button role="tab" type="button" data-atab="${k}" aria-selected="${k===aTab}">${ICON[k]}${l}${k==="bookings"&&needs?` <span class="cnt">${needs}</span>`:""}${k==="inbox"&&unread?` <span class="cnt">${unread}</span>`:""}</button>`).join("");
+  $("#crumb").textContent = ATABS.find(t => t[0] === aTab)[1];
+  $("#adrawer").innerHTML = `<b style="display:block;padding:4px 10px 12px;font-size:15px">Yellow Rose Cabin</b>` + ATABS.map(([k,l]) => `<button class="lnk" type="button" data-atab="${k}">${ICON[k].replace('<svg','<svg width="16" height="16"')}${l}</button>`).join("") + `<hr style="border:0;border-top:1px solid #d0d7de;margin:10px 0"><a href="#site">View your website</a><a href="#plan">The plan with Codember</a><button class="lnk" type="button" data-msgcodember>Message Codember</button>`;
+  const m = $("#amain");
+  if (aTab === "overview") m.innerHTML = ovHTML();
+  else if (aTab === "bookings") m.innerHTML = bookingsHTML();
+  else if (aTab === "rates") m.innerHTML = ratesHTML();
+  else if (aTab === "availability") m.innerHTML = availHTML();
+  else if (aTab === "homepage") m.innerHTML = homeHTML();
+  else if (aTab === "inbox") m.innerHTML = inboxHTML();
+  $("#aside").innerHTML = asideHTML();
+}
+function monthRevenue(){
+  const y = today.getFullYear(), mo = today.getMonth();
+  return S.bookings.filter(b => b.status !== "cancelled" && parse(b.checkIn).getMonth() === mo && parse(b.checkIn).getFullYear() === y).reduce((s,b) => s + (b.total||0), 0);
+}
+function asideHTML(){
+  const up = upcoming().slice(0,4);
+  return `<div class="abox"><div class="in"><h5>This month</h5><div class="kv"><span>Booked revenue</span><span>${money(monthRevenue())}</span></div><div class="kv"><span>Upcoming stays</span><span>${upcoming().length}</span></div><div class="kv"><span>Unread messages</span><span>${S.messages.filter(x=>!x.read).length}</span></div></div></div>
+  <div class="abox"><div class="in"><h5>Arriving next</h5>${up.length ? up.map(b => `<div class="kv"><span>${esc(b.guest)}</span><span>${nice(b.checkIn)}</span></div>`).join("") : `<p class="small">No upcoming stays yet.</p>`}</div></div>
+  <div class="abox"><div class="in" style="display:grid;gap:8px"><h5>Your site</h5><p class="small">Every change you save here shows on your website right away.</p><a class="btn line sm" href="#site">View website</a><button class="btn line sm" type="button" data-msgcodember>Message Codember</button></div></div>`;
+}
+function bookingRow(b, actions=true){
+  const c = C().cabins[b.cabin];
+  const act = !actions ? "" : b.status === "new" ? `<button class="btn ink sm" type="button" data-bconfirm="${b.id}">Confirm</button> ` + cancelBtn(b) : b.status === "confirmed" ? cancelBtn(b) : "";
+  return `<tr><td><b>${esc(b.guest)}</b>${b.example?'<span class="ex">Example</span>':""}<div class="small">${esc(b.contact||"")}</div></td><td>${esc(c ? c.name : b.cabin)}</td><td>${nice(b.checkIn)} to ${nice(b.checkOut)}</td><td class="mono">${money(b.total||0)}</td><td><span class="st ${b.status}">${stName(b.status)}</span></td>${actions?`<td style="text-align:right">${act}</td>`:""}</tr>`;
+}
+const cancelBtn = b => cancelArm === b.id ? `<button class="btn sm" style="background:#cf222e;color:#fff" type="button" data-bcancel="${b.id}">Yes, cancel</button>` : `<button class="btn line sm" type="button" data-barm="${b.id}">Cancel</button>`;
+function ovHTML(){
+  const needs = S.bookings.filter(b => b.status === "new"), msgs = S.messages.filter(x => !x.read).slice(0,3);
+  return `<div class="ovgrid"><div class="ov"><b>${needs.length}</b><span>bookings need confirming</span></div><div class="ov"><b>${upcoming().length}</b><span>upcoming stays</span></div><div class="ov"><b>${money(monthRevenue())}</b><span>booked this month</span></div></div>
+  <div class="abox"><header><h3>Needs your attention</h3><button class="btn line sm" type="button" data-atab="bookings">All bookings</button></header>${needs.length ? `<div class="tbl"><table><thead><tr><th>Guest</th><th>Cabin</th><th>Dates</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody>${needs.map(b=>bookingRow(b)).join("")}</tbody></table></div>` : `<div class="in small">You're all caught up. New online bookings land here.</div>`}</div>
+  <div class="abox"><header><h3>New messages</h3><button class="btn line sm" type="button" data-atab="inbox">Inbox</button></header>${msgs.length ? msgs.map(x => `<button class="inbox-item" type="button" data-msg="${x.id}"><span class="u"></span><span><b>${esc(x.from)}</b><p>${esc(x.text)}</p></span><span class="small">${esc(x.channel)}</span></button>`).join("") : `<div class="in small">No new messages.</div>`}</div>`;
+}
+function bookingsHTML(){
+  const all = S.bookings.slice().sort((a,b) => a.checkIn < b.checkIn ? -1 : 1);
+  const list = bFilter === "upcoming" ? all.filter(b => b.status !== "cancelled" && parse(b.checkOut) >= today) : bFilter === "new" ? all.filter(b => b.status === "new") : all;
+  return `<div class="abox"><header><h3>Bookings</h3><div style="display:flex;gap:6px;flex-wrap:wrap">${[["upcoming","Upcoming"],["new","Needs confirming"],["all","All"]].map(([k,l]) => `<button class="btn sm ${bFilter===k?"ink":"line"}" type="button" data-bfilter="${k}">${l}</button>`).join("")}</div></header>
+  ${list.length ? `<div class="tbl"><table><thead><tr><th>Guest</th><th>Cabin</th><th>Dates</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody>${list.map(b=>bookingRow(b)).join("")}</tbody></table></div>` : `<div class="in small">Nothing here yet.</div>`}</div>
+  <div class="abox"><header><h3>Add a phone booking</h3></header><form class="in" id="phoneForm" style="display:grid;gap:12px">
+    <div class="row3"><label class="field">Guest name<input id="pfName" required></label><label class="field">Phone<input id="pfPhone"></label><label class="field">Cabin<select id="pfCabin">${visibleKeys().map(k=>`<option value="${k}">${esc(C().cabins[k].name)}</option>`).join("")}</select></label></div>
+    <div class="row3"><label class="field">Check-in<input type="date" id="pfIn" required></label><label class="field">Check-out<input type="date" id="pfOut" required></label><label class="field">Guests<input type="number" id="pfGuests" min="1" value="2"></label></div>
+    <div><button class="btn ink sm" type="submit">Add booking</button> <span class="small">It blocks those dates on your website right away.</span></div></form></div>`;
+}
+function ratesHTML(){
+  const f = C().fees;
+  return `<div class="abox"><header><h3>Cabins and rates</h3><span class="small">Leave a rate blank if you don't offer it.</span></header>${cabinKeys().map(k => { const c = C().cabins[k], n = (id,v,l) => `<label class="field">${l}<input type="number" min="0" data-rf="${id}" value="${v ?? ""}"></label>`;
+    return `<form class="cabrow" data-rate="${k}"><img src="${PHOTO(k)}" alt="${esc(c.name)}"><div style="display:grid;gap:10px;min-width:0"><div class="fields">
+      <label class="field wide">Cabin name<input data-rf="name" value="${esc(c.name)}"></label>
+      ${n("night",c.night,"Nightly")}${n("bfast",c.bfast,"With breakfast")}${n("weeknight",c.weeknight,"3+ weeknights")}${n("week",c.week,"Weekly")}
+      ${n("clean",c.clean,"Cleaning fee")}${n("base",c.base,"Guests included")}${n("sleeps",c.sleeps,"Sleeps up to")}
+      <label class="check" style="align-self:end;padding-bottom:9px"><input type="checkbox" data-rf="pets" ${c.pets?"checked":""}> Pets OK</label>
+      <label class="field wide">Description<textarea data-rf="blurb">${esc(c.blurb)}</textarea></label></div>
+      <div class="foot2"><label class="check"><input type="checkbox" data-rf="show" ${c.show!==false?"checked":""}> Show on website</label><button class="btn ink sm" type="submit">Save ${esc(c.name)}</button></div></div></form>`; }).join("")}</div>
+  <div class="abox"><header><h3>Fees and tax</h3></header><form class="in" id="feeForm" style="display:grid;gap:12px"><div class="row3"><label class="field">Extra guest, per night<input type="number" id="feeExtra" value="${f.extra}"></label><label class="field">Pet, per night<input type="number" id="feePet" value="${f.pet}"></label><label class="field">Tax %<input type="number" id="feeTax" value="${f.tax}" step="0.25"></label></div><div><button class="btn ink sm" type="submit">Save fees</button></div></form></div>`;
+}
+function availHTML(){
+  const { taken, blocked } = takenFor(availCabin); let html = "";
+  for (let m=0; m<2; m++){
+    const first = new Date(today.getFullYear(), today.getMonth()+m, 1), days = new Date(first.getFullYear(), first.getMonth()+1, 0).getDate();
+    html += `<div class="month"><h4 style="font-family:var(--f-body);font-size:15px">${first.toLocaleString("en-US",{month:"long",year:"numeric"})}</h4><div class="dow">${"SMTWTFS".split("").map(c=>`<span>${c}</span>`).join("")}</div><div class="days">`;
+    for (let i=0;i<first.getDay();i++) html += `<span class="day blank"></span>`;
+    for (let d=1; d<=days; d++){ const dt = new Date(first.getFullYear(), first.getMonth(), d), k = ymd(dt); const cls = "day" + (taken.has(k)?" taken":blocked.has(k)?" blocked":"") + (blkFrom && ymd(blkFrom)===k ? " edge" : "");
+      html += `<button type="button" class="${cls}" data-blk="${k}" ${dt<today||taken.has(k)?"disabled":""}>${d}</button>`; }
+    html += `</div></div>`;
+  }
+  const blocks = S.blocks.filter(b => b.cabin === availCabin || b.cabin === "all").sort((a,b)=>a.from<b.from?-1:1);
+  return `<div class="abox"><header><h3>Close dates</h3><select id="availSel" style="width:auto">${cabinKeys().map(k=>`<option value="${k}" ${k===availCabin?"selected":""}>${esc(C().cabins[k].name)}</option>`).join("")}</select></header>
+  <div class="in"><p class="small" style="margin-bottom:12px">${blkFrom ? "Now tap the last day to close." : "Tap the first day you want closed, then the last day. Guests won't be able to book those dates."}</p><div class="cal" style="padding:0">${html}</div></div></div>
+  <div class="abox"><header><h3>Closed dates</h3></header><div class="in">${blocks.length ? blocks.map(b => `<div class="blk"><span><b>${nice(b.from)} to ${nice(b.to)}</b>${b.note?` <span class="small">${esc(b.note)}</span>`:""}</span><button class="btn line sm" type="button" data-unblock="${b.id}">Reopen</button></div>`).join("") : `<p class="small">Nothing closed for this cabin.</p>`}</div></div>`;
+}
+function homeHTML(){
+  const c = C();
+  return `<div class="abox"><header><h3>Homepage text</h3><span class="small">Shows at the top of your website.</span></header><form class="in" id="homeForm" style="display:grid;gap:14px">
+    <label class="field">Headline<input id="hHead" value="${esc(c.headline)}" maxlength="90"></label>
+    <label class="field">Highlighted words (part of the headline)<input id="hHl" value="${esc(c.highlight)}" maxlength="40"></label>
+    <label class="field">Intro sentence<textarea id="hSub" maxlength="240">${esc(c.subhead)}</textarea></label>
+    <label class="field">Announcement bar<input id="hAnn" value="${esc(c.announce)}" placeholder="Example: Fall weeknights 15% off through November" maxlength="120"></label>
+    <label class="check"><input type="checkbox" id="hAnnOn" ${c.announceOn?"checked":""}> Show the announcement bar</label>
+    <div class="small" style="font-weight:700">Preview</div>
+    <div class="preview-hero" id="hPrev"></div>
+    <div><button class="btn ink sm" type="submit">Publish to website</button></div></form></div>`;
+}
+function homePreview(){
+  const h = $("#hHead").value, hl = $("#hHl").value, i = hl ? h.lastIndexOf(hl) : -1;
+  $("#hPrev").innerHTML = `${$("#hAnnOn").checked && $("#hAnn").value ? `<div style="background:#2d7a4f;color:#fff;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600;margin-bottom:12px">${esc($("#hAnn").value)}</div>` : ""}<h1>${i>=0 ? esc(h.slice(0,i))+'<mark style="background:linear-gradient(transparent 58%,#ffd34d 58%);color:inherit">'+esc(hl)+"</mark>"+esc(h.slice(i+hl.length)) : esc(h)}</h1><p class="muted" style="margin-top:8px">${esc($("#hSub").value)}</p>`;
+}
+function inboxHTML(){
+  const list = S.messages.slice().sort((a,b) => (b.at||"") > (a.at||"") ? 1 : -1);
+  const cur = list.find(x => x.id === openMsg);
+  return `<div class="abox"><header><h3>Inbox</h3><span class="small">Website helper, texts, and Facebook in one place</span></header>${list.length ? list.map(x => `<button class="inbox-item ${x.read?"read":""}" type="button" data-msg="${x.id}"><span class="u"></span><span style="min-width:0"><b>${esc(x.from)}</b>${x.example?'<span class="ex">Example</span>':""}<p>${esc(x.text)}</p></span><span class="small">${esc(x.channel)}</span></button>`).join("") : `<div class="in small">No messages yet. Questions the website helper can't answer land here.</div>`}</div>
+  ${cur ? `<div class="abox"><header><h3>${esc(cur.from)}</h3><span class="small">${esc(cur.channel)}${cur.at?" &middot; "+new Date(cur.at).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}):""}</span></header><div class="in" style="display:grid;gap:12px"><p style="font-size:15px">${esc(cur.text)}</p><label class="field">Reply<textarea id="replyTxt" placeholder="Type your reply"></textarea></label><div><button class="btn ink sm" type="button" data-reply="${cur.id}">Send reply</button> <span class="small">In the live version this goes out by text or email.</span></div></div></div>` : ""}`;
+}
+
+/* ===================== PLAN ===================== */
+const GI = {
+  site:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+  ai:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.2 5.4L20 9l-4.4 3.8L17 19l-5-3-5 3 1.4-6.2L4 9l5.8-.6z"/></svg>',
+  tour:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12c3 2 15 2 18 0M12 3c-3 3-3 15 0 18"/></svg>',
+  find:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+  pay:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>'
+};
+const PLAN = [
+  ["site","The new guest website (in this demo)",["<b>Bright, photo-first design</b> built around your own photos","<b>Cabin finder</b> that matches guests to the right cabin","<b>Interactive property map</b> from your aerial photo","<b>Live availability calendar</b> with your real rates, fees, and tax","<b>Fishing, pool, and add-on prices</b> guests can see before they call","<b>Website helper</b> that answers common questions any hour"]],
+  ["back","Your owner back end (in this demo)",["<b>Bookings</b>: confirm, cancel, or add a phone booking","<b>Cabins and rates</b>: change any price or description yourself","<b>Availability</b>: close dates for repairs or family visits","<b>Homepage</b>: change your headline or post an announcement","<b>Inbox</b>: questions from the website in one place","<b>Message Codember</b> for anything else"]],
+  ["pay","Booking and payments",["<b>Secure online checkout</b> with card, Apple Pay, and Google Pay","<b>Your cancellation policy</b> handled automatically","<b>Add-ons at checkout</b>: firewood, motor, rod and reel, breakfast","<b>Gift certificates</b> bought online and emailed","<b>Airbnb and VRBO calendar sync</b> so nothing double books","<b>RV monthly autopay</b>"]],
+  ["ai","AI that saves you time",["<b>Helper on text and Facebook</b>, not just the website","<b>After-hours phone answering</b> that texts you a summary","<b>Smart rate suggestions</b> for holidays and slow weeks, you approve each one","<b>Review reply drafts</b> for Google and Facebook","<b>Listing writer</b> that keeps Airbnb and VRBO descriptions matched"]],
+  ["tour","360&deg; tours and media",["<b>On-site 360&deg; shoot</b> of every cabin, inside and out","<b>Drone flyover</b> of the lake and cove","<b>Short video walk-throughs</b> for Facebook and Instagram","<b>Fresh photos</b> to replace the grainy and sideways ones"]],
+  ["find","Getting found",["<b>Google Business Profile</b> cleanup with photos and a booking link","<b>Pages for your groups</b>: church retreats, scrapbooking, reunions","<b>Barndo venue page</b> with an event inquiry form","<b>Pages for every unit</b> on your map that isn't online yet"]]
+];
+const FIXES = ["Homepage says 12 cabins, but only 5 cabins and the RV sites have pages","Red Rose, Bear Shack, Texan, Texas Rose, Tiki Hut, Hen Den, and Blue Bird are on your map with no page","Lake House rates say up to 10 guests, the layout says it sleeps 8","Every cabin page lists its amenities twice","Barndo says queen murphy bed in one spot and queen air mattress in another","RV page shows \"Gallery not found\"","Pet fees show on Camp Shack and RV pages, which don't allow pets","\"Rod & real\" typo in fishing rentals","No check-in or check-out times anywhere","Payment is due in full, but booking is phone or email only","Yellow Rose photos are grainy GIF files","No guest reviews on the site"];
+function renderPlan(){
+  $("#planGroups").innerHTML = PLAN.map(([i,t,items]) => `<div class="group"><header><div class="gi">${GI[i]}</div><h3>${t}</h3></header><ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+  const w = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>';
+  $("#fixes").innerHTML = FIXES.map(f => `<div class="fix">${w}<span>${esc(f)}</span></div>`).join("");
+}
+
+/* ===================== Routing + render ===================== */
+let view = "site";
+function route(){
+  const h = location.hash.replace("#","");
+  const v = h === "owner" ? "owner" : h === "plan" ? "plan" : "site";
+  if (v !== view || !document.body.dataset.ready){ view = v; ["site","owner","plan"].forEach(x => $("#v-"+x).hidden = x !== v); window.scrollTo(0,0); }
+  $$(".switch a").forEach(a => a.setAttribute("aria-current", a.dataset.view === v ? "page" : "false"));
+  document.body.dataset.ready = "1";
+  renderAll();
+}
+function renderAll(){
+  if (view === "site"){ renderHero(); renderMatches(); renderAllCabins(); renderMap(); renderBookSelect(); renderCal(); renderAmen(); }
+  else if (view === "owner"){
+    const active = document.activeElement, keepId = active && active.closest && active.closest("#amain form") ? true : false;
+    if (keepId && (aTab === "rates" || aTab === "homepage" || aTab === "bookings")) { $("#aside").innerHTML = asideHTML(); return; }
+    renderOwner(); if (aTab === "homepage") homePreview();
+  }
+  else renderPlan();
+}
+function renderAmen(){
+  const A = [["Private piers","Lit for night fishing at the Yellow Rose","M4 20h16M6 20V10M18 20V10M3 10h18"],["Free boats","Paddle and Jon boats for every guest","M3 16h18l-3 4H6zM12 4v12M12 4l6 8"],["In-ground pool","Park-like setting by the Barndo","M2 18c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2M7 14V5a2 2 0 0 1 4 0M13 14V5a2 2 0 0 1 4 0"],["BBQ and fire pits","Picnic tables across the grounds","M12 3c2 3 4 4 4 8a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-4 0-7z"],["Wi-Fi","Lake House, Barndo, and RV sites","M2 8a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01"],["Pets welcome","Yellow Rose, Lake House, Cowboy Casa","M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 20c-4 0-6-2-6-4s3-4 6-4 6 2 6 4-2 4-6 4z"],["Breakfast option","At the Yellow Rose and Lake House","M4 10h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 11h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"],["Gift certificates","A stay makes a great present","M3 8h18v4H3zM5 12h14v8H5zM12 8v12M12 8c-2-4-6-3-5 0M12 8c2-4 6-3 5 0"]];
+  $("#amenGrid").innerHTML = A.map(([b,s,d]) => `<div class="am"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg></div><b>${b}</b><span>${s}</span></div>`).join("");
+}
+
+/* ===================== Events ===================== */
+function jumpTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"start"}); }
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-jump],[data-open],[data-book],[data-close],[data-pin],[data-copy],[data-askrv],[data-atab],[data-bfilter],[data-bconfirm],[data-barm],[data-bcancel],[data-blk],[data-unblock],[data-msg],[data-reply],[data-msgcodember],#scrim,#burger");
+  if (!t) return;
+  if (t.dataset.jump){ e.preventDefault(); if (view !== "site"){ location.hash = "site"; setTimeout(() => jumpTo(t.dataset.jump), 50); } else jumpTo(t.dataset.jump); return; }
+  if (t.dataset.open){ openDrawer(t.dataset.open); return; }
+  if (t.dataset.book){ closeDrawer(); bk = {cabin:t.dataset.book, ci:null, co:null}; $("#reserveMsg").innerHTML = ""; $("#bkGuests").value = Math.min(fGuests, C().cabins[t.dataset.book].sleeps); $("#bkPets").value = $("#fPets").checked && C().cabins[t.dataset.book].pets ? 1 : 0; renderBookSelect(); renderCal(); jumpTo("book"); return; }
+  if (t.hasAttribute("data-close") || t.id === "scrim"){ closeDrawer(); return; }
+  if (t.dataset.pin){ pinOn = t.dataset.pin; renderMap(); return; }
+  if (t.dataset.copy){ try { await navigator.clipboard.writeText(t.dataset.copy); toast("Copied"); } catch(err){ toast(t.dataset.copy); } return; }
+  if (t.hasAttribute("data-askrv")){ openChat(); ask("Do you have an RV site open?"); return; }
+  if (t.id === "burger"){ const d = $("#adrawer"), on = !d.classList.contains("on"); d.classList.toggle("on", on); d.setAttribute("aria-hidden", !on); t.setAttribute("aria-expanded", on); return; }
+  if (t.dataset.atab){ aTab = t.dataset.atab; openMsg = null; $("#adrawer").classList.remove("on"); renderOwner(); if (aTab==="homepage") homePreview(); return; }
+  if (t.dataset.bfilter){ bFilter = t.dataset.bfilter; renderOwner(); return; }
+  if (t.dataset.bconfirm){ const b = S.bookings.find(x => x.id === t.dataset.bconfirm); if (b){ const {id, ...rest} = b; await write("bookings/"+id, Object.assign(rest, {status:"confirmed"})); toast(`Confirmed. ${b.guest} gets a confirmation text in the live version.`); } return; }
+  if (t.dataset.barm){ cancelArm = t.dataset.barm; renderOwner(); return; }
+  if (t.dataset.bcancel){ const b = S.bookings.find(x => x.id === t.dataset.bcancel); cancelArm = null; if (b){ const {id, ...rest} = b; await write("bookings/"+id, Object.assign(rest, {status:"cancelled"})); toast("Cancelled. Those dates are open again on your website."); } return; }
+  if (t.dataset.blk){
+    const d = parse(t.dataset.blk);
+    if (!blkFrom){ blkFrom = d; renderOwner(); return; }
+    let a = blkFrom, b = d; if (b < a) [a,b] = [b,a]; blkFrom = null;
+    await write("blocks/"+newId("k"), {cabin:availCabin, from:ymd(a), to:ymd(b), note:"Closed by owner"});
+    toast(`Closed ${nice(ymd(a))} to ${nice(ymd(b))} on your website.`); return;
+  }
+  if (t.dataset.unblock){ await write("blocks/"+t.dataset.unblock, null, {del:true}); toast("Reopened. Guests can book those dates again."); return; }
+  if (t.dataset.msg){ aTab = "inbox"; openMsg = t.dataset.msg; const m = S.messages.find(x => x.id === openMsg); if (m && !m.read){ const {id, ...rest} = m; await write("messages/"+id, Object.assign(rest, {read:true})); } renderOwner(); return; }
+  if (t.dataset.reply){ const v = $("#replyTxt").value.trim(); if (!v){ toast("Type a reply first."); return; } $("#replyTxt").value = ""; toast("Reply sent. In the live version this goes out by text or email."); return; }
+  if (t.hasAttribute("data-msgcodember")){ toast("This opens a message to Codember in the live version."); return; }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape"){ closeDrawer(); $("#adrawer").classList.remove("on"); } });
+document.addEventListener("change", e => {
+  if (e.target.id === "availSel"){ availCabin = e.target.value; blkFrom = null; renderOwner(); }
+  if (e.target.id === "bkCabin"){ bk = {cabin:e.target.value, ci:null, co:null}; $("#reserveMsg").innerHTML = ""; renderCal(); }
+  if (e.target.id === "fPets") renderMatches();
+});
+document.addEventListener("input", e => {
+  if (["bkGuests","bkPets","bkBreakfast"].includes(e.target.id)) quote();
+  if (["hHead","hHl","hSub","hAnn","hAnnOn"].includes(e.target.id)) homePreview();
+});
+document.addEventListener("submit", async e => {
+  const f = e.target; e.preventDefault();
+  if (f.id === "guestForm"){
+    if (!bk.ci || !bk.co) return;
+    const c = C().cabins[bk.cabin], guests = Math.max(1, Math.min(c.sleeps, +$("#bkGuests").value || 1)), pets = Math.max(0, +$("#bkPets").value || 0);
+    const q = priceStay(bk.cabin, bk.ci, bk.co, guests, pets, $("#bkBreakfast").checked);
+    const name = $("#gName").value.trim(), contact = $("#gContact").value.trim(); if (!name) return;
+    const { taken, blocked } = takenFor(bk.cabin);
+    if (nightsOf(bk.ci, bk.co).some(d => taken.has(ymd(d)) || blocked.has(ymd(d)))){ $("#reserveMsg").innerHTML = `<div class="done" style="background:var(--rose-soft);color:var(--rose)">Someone just booked part of those dates. Pick new dates.</div>`; bk.ci = bk.co = null; renderCal(); return; }
+    const saved = await write("bookings/"+newId("b"), {cabin:bk.cabin, guest:name, contact, checkIn:ymd(bk.ci), checkOut:ymd(bk.co), guests, pets, breakfast:$("#bkBreakfast").checked, total:Math.round(q.total), status:"new", source:"Website", at:new Date().toISOString()});
+    $("#reserveMsg").innerHTML = `<div class="done">You're booked, ${esc(name.split(" ")[0])}! ${esc(c.name)}, ${nice(ymd(bk.ci))} to ${nice(ymd(bk.co))}. ${saved ? "Open the owner back end to see it arrive." : "Open the owner back end to see it."}</div>`;
+    bk.ci = bk.co = null; $("#gName").value = ""; $("#gContact").value = ""; renderCal();
+  }
+  if (f.id === "chatForm"){ const v = $("#chatIn").value.trim(); if (v){ ask(v); $("#chatIn").value = ""; } }
+  if (f.dataset.rate){
+    const k = f.dataset.rate, cur = C().cabins[k], next = Object.assign({}, cur);
+    $$("[data-rf]", f).forEach(i => { const key = i.dataset.rf;
+      if (i.type === "checkbox") next[key] = i.checked;
+      else if (i.type === "number") next[key] = i.value === "" ? null : Math.max(0, +i.value);
+      else next[key] = i.value.trim() || cur[key]; });
+    if (!next.night){ toast("Nightly rate can't be blank."); return; }
+    const content = clone(C()); content.cabins[k] = next; document.activeElement.blur();
+    await write("site/content", content); toast(`Saved. ${next.name} is updated on your website.`); renderOwner();
+  }
+  if (f.id === "feeForm"){ const content = clone(C()); content.fees = {extra:+$("#feeExtra").value||0, pet:+$("#feePet").value||0, tax:+$("#feeTax").value||0}; document.activeElement.blur(); await write("site/content", content); toast("Saved. New fees apply to every quote."); renderOwner(); }
+  if (f.id === "homeForm"){ const content = clone(C()); Object.assign(content, {headline:$("#hHead").value.trim()||DEFAULT_CONTENT.headline, highlight:$("#hHl").value.trim(), subhead:$("#hSub").value.trim(), announce:$("#hAnn").value.trim(), announceOn:$("#hAnnOn").checked}); document.activeElement.blur(); await write("site/content", content); toast("Published. Your homepage is updated."); renderOwner(); homePreview(); }
+  if (f.id === "phoneForm"){
+    const a = $("#pfIn").value, b = $("#pfOut").value; if (!a || !b || b <= a){ toast("Check-out has to be after check-in."); return; }
+    const k = $("#pfCabin").value, { taken, blocked } = takenFor(k);
+    if (nightsOf(parse(a), parse(b)).some(d => taken.has(ymd(d)) || blocked.has(ymd(d)))){ toast("Those dates overlap another booking or closed dates."); return; }
+    const g = Math.max(1, +$("#pfGuests").value||1), q = priceStay(k, parse(a), parse(b), Math.min(g, C().cabins[k].sleeps), 0, false);
+    document.activeElement.blur();
+    await write("bookings/"+newId("b"), {cabin:k, guest:$("#pfName").value.trim(), contact:$("#pfPhone").value.trim(), checkIn:a, checkOut:b, guests:g, pets:0, total:Math.round(q.total), status:"confirmed", source:"Phone", at:new Date().toISOString()});
+    toast("Added. Those dates are now booked on your website."); renderOwner();
+  }
+});
+$("#cal").addEventListener("click", e => {
+  const b = e.target.closest("button.day"); if (!b || b.disabled) return;
+  const dt = parse(b.dataset.d), { taken, blocked } = takenFor(bk.cabin), busy = d => taken.has(ymd(d)) || blocked.has(ymd(d));
+  if (!bk.ci || bk.co || dt <= bk.ci){ if (busy(dt)) return; bk.ci = dt; bk.co = null; }
+  else if (nightsOf(bk.ci, dt).some(busy)){ bk.ci = busy(dt) ? null : dt; bk.co = null; }
+  else bk.co = dt;
+  $("#reserveMsg").innerHTML = ""; renderCal();
+});
+$("#clearDates").addEventListener("click", () => { bk.ci = bk.co = null; renderCal(); });
+$$("[data-step]").forEach(b => b.addEventListener("click", () => { fGuests = Math.max(1, Math.min(40, fGuests + +b.dataset.step)); renderMatches(); }));
+$("#trip").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; fTrip = b.dataset.trip; $$("#trip button").forEach(x => x.setAttribute("aria-pressed", x === b)); renderMatches(); });
+function openChat(){ $("#chat").hidden = false; $("#bubble").setAttribute("aria-expanded","true"); $("#chatIn").focus(); }
+$("#bubble").addEventListener("click", () => { if ($("#chat").hidden) openChat(); else { $("#chat").hidden = true; $("#bubble").setAttribute("aria-expanded","false"); } });
+$("#chatClose").addEventListener("click", () => { $("#chat").hidden = true; $("#bubble").setAttribute("aria-expanded","false"); });
+$("#qchips").innerHTML = ["Plan our weekend","Can I bring my dog?","How much is fishing?","Directions","Do you host weddings?"].map(q => `<button type="button">${q}</button>`).join("");
+$("#qchips").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
+say("Hi! I can answer questions about the cabins, fishing, pets, and directions. Anything I can't answer goes straight to Sandy.", "bot");
+
+window.addEventListener("hashchange", route);
+route(); setLive(); connect();
+})();
+</script>
+
+</body></html>
