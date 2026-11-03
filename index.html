@@ -295,6 +295,12 @@ section.s.tint-leaf{background:#f0f7f1}
 .abody .wrap{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:24px;padding-block:24px 60px;max-width:1280px}
 .abox{background:#fff;border:1px solid #d0d7de;border-radius:10px}
 .abox+.abox{margin-top:16px}
+.sms{background:#f6f8fa;border-radius:14px;padding:12px;display:grid;gap:6px}
+.sms .who{display:flex;justify-content:space-between;font-size:11.5px;color:#656d76;font-weight:600}
+.sms .bub{background:#e9e9eb;color:#1f2328;border-radius:16px 16px 16px 4px;padding:9px 12px;font-size:13px;line-height:1.4}
+.sms .bub.me{background:#0a84ff;color:#fff;border-radius:16px 16px 4px 16px;justify-self:end}
+.alrt{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;padding:6px 0;border-top:1px solid #eaeef2}
+.alrt input{width:auto;accent-color:#1f883d}
 .abox>header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid #d0d7de;background:#f6f8fa;border-radius:10px 10px 0 0;flex-wrap:wrap}
 .abox>header h3{font-family:var(--f-body);font-size:15px;font-weight:700;color:#1f2328}
 .abox .in{padding:16px}
@@ -688,7 +694,7 @@ const DEFAULT_CONTENT = {
       blurb:"A cute little cabin a few steps from the lake. Comes with a Jon boat, oars, and life vest, so bring your fishing gear.",
       meta:["Sleeps 3","Jon boat included","Pets welcome"], amen:["Satellite TV","Small fridge","Microwave and toaster oven","Crock pot","Small grill","Window AC and heater","Bath house nearby"] },
     campshack: { name:"Camp Shack", night:75, bfast:null, weeknight:50, week:null, clean:25, base:2, sleeps:4, pets:false, show:true,
-      blurb:"A screened shelter right on the water. Wake up to birds outside the screen, put the coffee on, and watch the bass hit the water. Room for one tent.",
+      blurb:"A cozy closed-in shelter right on the water. Wake up to the birds, put the coffee on, and watch the bass hit the water. Room for one tent.",
       meta:["On the water","Room for a tent","String lights"], amen:["Electric and water","Ceiling fan","Small fridge","Double hot plate","Coffee pot and coffee","2 recliners and picnic table","BBQ pit"] },
     barndo: { name:"The Barndo", night:125, bfast:null, weeknight:null, week:null, clean:75, base:4, sleeps:4, pets:false, show:true,
       blurb:"A 30 by 40 rustic venue that turns into a cabin in minutes. Queen murphy bed and two twins, right next to the pool, with a boat and a basket of breakfast items.",
@@ -793,7 +799,7 @@ function renderHero(){
 const TRIP = {couple:"a couples getaway", fishing:"a fishing trip", family:"a family trip", budget:"a budget stay", event:"a retreat or event"};
 const FIT = {
   couple:{yellowrose:[32,"King bed, private lit pier, wrap-around porch"], lakehouse:[18,"Spa tub and a private balcony over the lake"], cowboy:[6,"Simple and close to the water"]},
-  fishing:{cowboy:[28,"Jon boat, oars, and life vest included"], yellowrose:[24,"Private pier lit for night fishing"], campshack:[22,"Screened shelter right on the water"], lakehouse:[20,"Sits on a point by the cove"]},
+  fishing:{cowboy:[28,"Jon boat, oars, and life vest included"], yellowrose:[24,"Private pier lit for night fishing"], campshack:[22,"Closed-in shelter right on the water"], lakehouse:[20,"Sits on a point by the cove"]},
   family:{lakehouse:[36,"3 bedrooms, 2.5 baths, washer and dryer"], barndo:[14,"Right next to the pool"], yellowrose:[8,"Futons for the kids"]},
   budget:{cowboy:[30,"Weeknights from $50"], campshack:[28,"Weeknights from $50"], barndo:[8,"Full kitchen and bath"]},
   event:{barndo:[40,"30 by 40 venue that converts in minutes"], lakehouse:[18,"Room for 8 and big entertaining areas"], yellowrose:[6,"Quiet cabin for the guest of honor"]}
@@ -1043,7 +1049,14 @@ function monthRevenue(){
 }
 function asideHTML(){
   const up = upcoming().slice(0,4);
-  return `<div class="abox"><div class="in"><h5>This month</h5><div class="kv"><span>Booked revenue</span><span>${money(monthRevenue())}</span></div><div class="kv"><span>Upcoming stays</span><span>${upcoming().length}</span></div><div class="kv"><span>Unread messages</span><span>${S.messages.filter(x=>!x.read).length}</span></div></div></div>
+  const sample = {guest:"Jamie R.", cabin:"yellowrose", checkIn:ymd(new Date(Date.now()+9*864e5)), checkOut:ymd(new Date(Date.now()+11*864e5)), total:356}; /* example text until a real booking comes in */
+  const nb = S.bookings.filter(b => b.status === "new").sort((a,b) => String(b.at||"").localeCompare(String(a.at||"")))[0] || sample;
+  const nc = nb && C().cabins[nb.cabin];
+  const alerts = `<div class="abox"><div class="in" style="display:grid;gap:10px"><h5>Text alerts to your phone</h5>
+    ${nb ? `<div class="sms"><div class="who"><span>Yellow Rose Bookings</span><span>now</span></div><div class="bub">New booking: ${esc(nb.guest)}, ${esc(nc ? nc.name : nb.cabin)}, ${nice(nb.checkIn)} to ${nice(nb.checkOut)}, ${money(nb.total||0)}. Dates are held. Reply 1 to confirm.</div><div class="bub me">1</div><div class="bub">Confirmed. ${esc(nb.guest)} got a confirmation text.</div></div>` : `<p class="small">Book a stay on the guest website and the text shows up here.</p>`}
+    <div><label class="alrt"><span>New online booking</span><input type="checkbox" checked></label><label class="alrt"><span>Cancellation</span><input type="checkbox" checked></label><label class="alrt"><span>Guest question for you</span><input type="checkbox" checked></label><label class="alrt"><span>Quiet hours, 9 PM to 7 AM</span><input type="checkbox" checked></label></div>
+    <p class="small">Texts, not email. Online bookings hold the dates the second they come in, and phone bookings you add here block them too, so two guests can never get the same night.</p></div></div>`;
+  return alerts + `<div class="abox"><div class="in"><h5>This month</h5><div class="kv"><span>Booked revenue</span><span>${money(monthRevenue())}</span></div><div class="kv"><span>Upcoming stays</span><span>${upcoming().length}</span></div><div class="kv"><span>Unread messages</span><span>${S.messages.filter(x=>!x.read).length}</span></div></div></div>
   <div class="abox"><div class="in"><h5>Arriving next</h5>${up.length ? up.map(b => `<div class="kv"><span>${esc(b.guest)}</span><span>${nice(b.checkIn)}</span></div>`).join("") : `<p class="small">No upcoming stays yet.</p>`}</div></div>
   <div class="abox"><div class="in" style="display:grid;gap:8px"><h5>Your site</h5><p class="small">Every change you save here shows on your website right away.</p><a class="btn line sm" href="#site">View website</a><button class="btn line sm" type="button" data-msgcodember>Message Codember</button></div></div>`;
 }
