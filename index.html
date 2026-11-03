@@ -105,13 +105,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .qbar .qstep button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-weight:800;line-height:1}
 .qbar .go{border:0;border-radius:999px;padding:0 26px;font-weight:800;font-size:16px;background:var(--sun-deep);color:#1c1406;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .2s,background .2s}
 .qbar .go:hover{background:#f0b52a;transform:scale(1.03)}
-.dots{position:absolute;top:26px;right:max(16px,calc((100% - 1200px)/2 + 16px));display:flex;gap:8px;align-items:flex-end;padding:10px 14px 8px;border-radius:14px;background:rgba(10,24,18,.38);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.dot{flex:none;white-space:nowrap;width:84px;border:0;background:none;padding:0;text-align:left;color:rgba(255,255,255,.75);font-size:12px;font-weight:700}
-.dot i{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;margin-bottom:7px}
+.dots{position:absolute;top:28px;right:max(16px,calc((100% - 1200px)/2 + 16px));display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.dots .bars{display:flex;gap:6px}
+.dot{flex:none;width:38px;height:22px;border:0;background:none;padding:0;display:flex;align-items:center;cursor:pointer}
+.dot i{display:block;width:100%;height:3px;border-radius:2px;background:rgba(255,255,255,.4);overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.25)}
 .dot i::after{content:"";display:block;height:100%;width:0;background:#fff}
-.dot.on{color:#fff}
+.dot:hover i{background:rgba(255,255,255,.65)}
 .dot.on i::after{animation:fill 7s linear forwards}
-.dot.done i::after{width:100%}
+.dot.seen i::after{width:100%}
+.dotlabel{color:#fff;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.55)}
 @keyframes fill{to{width:100%}}
 .hstats{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:rgba(255,255,255,.85)}
 .hstats b{font-family:var(--f-display);font-size:20px;color:#fff;margin-right:6px}
@@ -155,8 +157,8 @@ section.s.tint-leaf{background:#f0f7f1}
 .mapbox{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 16px 40px rgba(24,56,42,.16);background:#2c3b2a}
 .mapbox img{display:block;width:100%;height:auto}
 .pin{position:absolute;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;width:44px;height:44px;display:grid;place-items:center}
-.pin::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--sun);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45);transition:transform .2s}
-.pin::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;border:2px solid var(--sun);animation:ping 2.2s ease-out infinite}
+.pin::before{content:"";position:absolute;left:50%;top:50%;translate:-50% -50%;width:16px;height:16px;border-radius:50%;background:var(--sun);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45);transition:transform .2s}
+.pin::after{content:"";position:absolute;left:50%;top:50%;margin:-8px 0 0 -8px;width:16px;height:16px;border-radius:50%;border:2px solid var(--sun);animation:ping 2.2s ease-out infinite}
 .pin.other::before{background:#fff;width:12px;height:12px;border-width:2px;border-color:var(--ink)}
 .pin.other::after{display:none}
 .pin.amen::before{background:#5fc3d8}
@@ -434,7 +436,7 @@ tr:last-child td{border-bottom:0}
   <section class="hero" id="top">
     <div class="slides" id="slides"><div class="slide on" style="--kx:-1.5%;--ky:-1%"><img src="photos/pool.png" alt="In-ground pool on the grounds" fetchpriority="high"></div><div class="slide" style="--kx:1.5%;--ky:-1%"><img data-src="photos/yellowrose.png" alt="The Yellow Rose cabin on its lawn"></div><div class="slide" style="--kx:-1%;--ky:1%"><img data-src="photos/hero.png" alt="Sunset over the lake from the pier"></div><div class="slide" style="--kx:1.5%;--ky:1%"><img data-src="photos/lakehouse.png" alt="The Lake House"></div><div class="slide" style="--kx:-1.5%;--ky:-1%"><img data-src="photos/campshack.png" alt="Camp Shack under string lights at night"></div></div>
     <div class="wrap">
-      <div class="dots" id="dots"><button class="dot on" type="button" data-slide="0" aria-label="Show The pool"><i></i>The pool</button><button class="dot" type="button" data-slide="1" aria-label="Show Yellow Rose"><i></i>Yellow Rose</button><button class="dot" type="button" data-slide="2" aria-label="Show Sunsets"><i></i>Sunsets</button><button class="dot" type="button" data-slide="3" aria-label="Show Lake House"><i></i>Lake House</button><button class="dot" type="button" data-slide="4" aria-label="Show Camp Shack"><i></i>Camp Shack</button></div>
+      <div class="dots"><div class="bars" id="dots"><button class="dot on" type="button" data-slide="0" aria-label="Show The pool" data-label="The pool"><i></i></button><button class="dot" type="button" data-slide="1" aria-label="Show Yellow Rose" data-label="Yellow Rose"><i></i></button><button class="dot" type="button" data-slide="2" aria-label="Show Sunsets" data-label="Sunsets"><i></i></button><button class="dot" type="button" data-slide="3" aria-label="Show Lake House" data-label="Lake House"><i></i></button><button class="dot" type="button" data-slide="4" aria-label="Show Camp Shack" data-label="Camp Shack"><i></i></button></div><span class="dotlabel" id="dotLabel">The pool</span></div>
       <div class="pill rise d1"><span class="live"></span>Goodrich, Texas &middot; 30-acre spring-fed lake</div>
       <h1 id="heroHead" class="rise d2">Come relax with us in the <mark>piney woods.</mark></h1>
       <p class="lede rise d3" id="heroSub">Cozy cabins, a lake house, and RV sites on a quiet 30-acre lake. Fish off your own pier, swim in the pool, and book your stay in two minutes.</p>
@@ -856,7 +858,7 @@ let vrRaf = 0;
 function startVR(k){
   cancelAnimationFrame(vrRaf);
   const stage = $("#vrStage"), cv = $("#vrCanvas"), ctx = cv.getContext("2d"), spots = $("#vrSpots"), hint = $("#vrHint"), note = $("#vrNote"), name = esc(C().cabins[k].name);
-  const pp = PINS.find(p => p.k === k) || {x:50, y:40}, pin = {x:pp.x, y: pp.y < 8 ? pp.y + 5.4 : pp.y - 5.2};
+  const pin = PINS.find(p => p.k === k) || {x:50, y:40}; /* pins sit on each building in the aerial photo */
   let mode = "inside", off = 0, vel = .35, dragging = false, lastX = 0, t0 = performance.now(), img = new Image(), map = new Image(), touched = false;
   img.src = PHOTO(k); map.src = "photos/map.png";
   const SP = [{a:.18,y:.55,l:"Porch"},{a:.52,y:.5,l:"Step inside"},{a:.84,y:.45,l:"Lake view"}];
@@ -872,8 +874,9 @@ function startVR(k){
   function drawDrone(now){
     const W = cv.width, H = cv.height; if (!map.complete || !map.naturalWidth) return;
     const p = Math.min(1, (now - t0) / 5200), e = 1 - Math.pow(1-p, 3), z = 1 + e*1.9;
-    const cx = map.naturalWidth * (.5 + (pin.x/100 - .5)*e), cy = map.naturalHeight * (.5 + (pin.y/100 - .5)*e);
-    const sw = map.naturalWidth / z, sh = sw * H / W;
+    let cx = map.naturalWidth * (.5 + (pin.x/100 - .5)*e), cy = map.naturalHeight * (.5 + (pin.y/100 - .5)*e);
+    const MW = map.naturalWidth, MH = map.naturalHeight, sw = Math.min(MW, MH * W / H) / z, sh = sw * H / W;
+    cx = Math.max(sw/2, Math.min(MW - sw/2, cx)); cy = Math.max(sh/2, Math.min(MH - sh/2, cy));
     ctx.drawImage(map, cx - sw/2, cy - sh/2, sw, sh, 0, 0, W, H);
     const px = (map.naturalWidth*pin.x/100 - (cx - sw/2)) / sw * W, py = (map.naturalHeight*pin.y/100 - (cy - sh/2)) / sh * H, r = (8 + 6*Math.sin(now/300)) * (W/stage.clientWidth);
     ctx.fillStyle = "rgba(255,211,77,.35)"; ctx.beginPath(); ctx.arc(px, py, r*2.2, 0, 6.28); ctx.fill();
@@ -903,18 +906,18 @@ function closeDrawer(){ $("#drawer").classList.remove("on"); $("#scrim").classLi
 
 /* Property map */
 const PINS = [
-  {k:"lakehouse", x:8, y:7.9}, {k:"campshack", x:55, y:3.9}, {k:"cowboy", x:40.3, y:14.1}, {k:"yellowrose", x:71.3, y:33.6}, {k:"barndo", x:55.8, y:38.9},
-  {k:"pool", x:47.5, y:28.1, kind:"amen", name:"Pool", text:"In-ground pool in a park-like setting, right beside the Barndo.", photo:"pool"},
-  {k:"rvsites", x:20.8, y:58.9, kind:"rv", name:"RV Sites", text:"Two covered sites and one open site. Electric, sewer, water, garbage pickup, and Wi-Fi included.", photo:"rv"},
-  {k:"main", x:60.3, y:21.8, kind:"other", name:"Main House", text:"The main house on the property."},
-  {k:"redrose", x:25.8, y:26.1, kind:"other", name:"Red Rose", text:"Has a washer and dryer. Call to ask about dates."},
-  {k:"bearshack", x:6, y:31.8, kind:"other", name:"Bear Shack", text:"Near the Lake House back porch. Call to ask about dates."},
-  {k:"texan", x:21.8, y:36.5, kind:"other", name:"Texan", text:"Call to ask about dates."},
-  {k:"tiki", x:31.7, y:43.4, kind:"other", name:"Tiki Hut", text:"Call to ask about dates."},
-  {k:"texasrose", x:18.5, y:51.5, kind:"other", name:"Texas Rose", text:"Call to ask about dates."},
-  {k:"lakerv", x:12, y:19.6, kind:"other", name:"Lake RV Site", text:"An RV site near the water. Call to ask."},
-  {k:"henden", x:82.7, y:81.1, kind:"other", name:"Hen Den", text:"Call to ask about dates."},
-  {k:"bluebird", x:94.3, y:88.2, kind:"other", name:"Blue Bird", text:"Call to ask about dates."}
+  {k:"lakehouse", x:7.8, y:12.3}, {k:"campshack", x:53.2, y:1.6}, {k:"cowboy", x:39.6, y:24.3}, {k:"yellowrose", x:69.8, y:37}, {k:"barndo", x:55.6, y:37.4},
+  {k:"pool", x:48, y:32.5, kind:"amen", name:"Pool", text:"In-ground pool in a park-like setting, right beside the Barndo.", photo:"pool"},
+  {k:"rvsites", x:24, y:46.2, kind:"rv", name:"RV Sites", text:"Two covered sites and one open site. Electric, sewer, water, garbage pickup, and Wi-Fi included.", photo:"rv"},
+  {k:"main", x:60.2, y:28.5, kind:"other", name:"Main House", text:"The main house on the property."},
+  {k:"redrose", x:25.2, y:30, kind:"other", name:"Red Rose", text:"Has a washer and dryer. Call to ask about dates."},
+  {k:"bearshack", x:9.4, y:41.6, kind:"other", name:"Bear Shack", text:"Near the Lake House back porch. Call to ask about dates."},
+  {k:"texan", x:22, y:39.9, kind:"other", name:"Texan", text:"Call to ask about dates."},
+  {k:"tiki", x:32.5, y:41.4, kind:"other", name:"Tiki Hut", text:"Call to ask about dates."},
+  {k:"texasrose", x:18.5, y:48.8, kind:"other", name:"Texas Rose", text:"Call to ask about dates."},
+  {k:"lakerv", x:12, y:16.6, kind:"other", name:"Lake RV Site", text:"An RV site near the water. Call to ask."},
+  {k:"henden", x:82.6, y:84.7, kind:"other", name:"Hen Den", text:"Call to ask about dates."},
+  {k:"bluebird", x:92.9, y:92.7, kind:"other", name:"Blue Bird", text:"Call to ask about dates."}
 ];
 let pinOn = "yellowrose";
 function renderMap(){
@@ -922,7 +925,7 @@ function renderMap(){
   for (const p of PINS){
     if (!p.kind && C().cabins[p.k] && C().cabins[p.k].show === false) continue;
     const b = document.createElement("button"); b.type = "button"; b.className = "pin " + (p.kind === "amen" ? "amen" : p.kind === "other" ? "other" : "") + (p.k === pinOn ? " on" : "");
-    b.style.left = p.x + "%"; b.style.top = (p.y < 8 ? p.y + 5.4 : p.y - 5.2) + "%"; b.setAttribute("aria-label", p.kind ? p.name : C().cabins[p.k].name); b.dataset.pin = p.k; box.appendChild(b);
+    b.style.left = p.x + "%"; b.style.top = p.y + "%"; b.setAttribute("aria-label", p.kind ? p.name : C().cabins[p.k].name); b.dataset.pin = p.k; box.appendChild(b);
   }
   const p = PINS.find(x => x.k === pinOn) || PINS[3], card = $("#mapcard");
   if (!p.kind){ const c = C().cabins[p.k];
@@ -1272,7 +1275,7 @@ window.addEventListener("hashchange", route);
   const slides = $$("#slides .slide"), dots = $$("#dots .dot"); let cur = 0, timer;
   const load = i => { const im = slides[i].querySelector("img"); if (im.dataset.src){ im.src = im.dataset.src; im.removeAttribute("data-src"); } };
   function show(i){ load(i); load((i+1) % slides.length);
-    slides.forEach((s,j) => s.classList.toggle("on", j === i)); dots.forEach((d,j) => { d.classList.toggle("on", j === i); d.classList.toggle("done", j < i); });
+    slides.forEach((s,j) => s.classList.toggle("on", j === i)); dots.forEach((d,j) => { d.classList.toggle("on", j === i); d.classList.toggle("seen", j < i); }); $("#dotLabel").textContent = dots[i].dataset.label;
     cur = i; clearTimeout(timer); if (!reduceMotion) timer = setTimeout(() => show((cur+1) % slides.length), 7000); }
   dots.forEach(d => d.addEventListener("click", () => show(+d.dataset.slide)));
   const first = slides[0].querySelector("img"); (first.complete ? show(0) : first.addEventListener("load", () => show(0), {once:true}));
