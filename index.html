@@ -1,9 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
 <title>Yellow Rose Cabin Upgrade</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap">
 <style>
 /* Layout: one artifact, three views by hash. #site = the guest website (bright, photo-led). #owner = Sandy's back end (GitHub-style light admin). #plan = what Codember delivers. */
 :root{
@@ -76,25 +80,44 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .snav{display:flex;gap:2px;margin-left:auto}
 .snav a{color:var(--text);text-decoration:none;font-weight:700;font-size:14px;padding:8px 11px;border-radius:8px}
 .snav a:hover{background:var(--sunk)}
-.hero{background:radial-gradient(900px 520px at 90% -10%,#ffe9a3 0%,rgba(255,233,163,0) 60%),radial-gradient(700px 500px at -5% 110%,#d8eefc 0%,rgba(216,238,252,0) 60%),#fff}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;align-items:center;padding-block:56px 70px}
-.hero h1{font-size:clamp(40px,5.6vw,72px);letter-spacing:-.015em;max-width:13ch}
-.hero h1 mark{background:linear-gradient(transparent 58%,var(--sun) 58%,var(--sun) 92%,transparent 92%);color:inherit;padding:0 .06em}
-.hero .lede{font-size:18px;color:#4a5a50;max-width:46ch;margin-top:16px}
-.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
-.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--muted)}
-.stats b{display:block;font-family:var(--f-display);font-size:26px;color:var(--ink)}
-.mosaic{position:relative;display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:min(520px,52vw);min-height:380px}
-.mosaic figure{margin:0;border-radius:22px;overflow:hidden;box-shadow:0 18px 40px rgba(24,56,42,.18);background:#ddd}
-.mosaic figure:first-child{grid-row:span 2}
-.mosaic img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
-.mosaic figure:hover img{transform:scale(1.05)}
-.chip{position:absolute;display:flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:9px 14px;font-weight:800;font-size:13.5px;color:var(--ink);box-shadow:0 10px 28px rgba(24,56,42,.18);animation:bob 5s ease-in-out infinite;white-space:nowrap}
-.chip i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px}
-.chip.c1{left:-18px;top:14%}.chip.c1 i{background:#ffe9a3}
-.chip.c2{right:-12px;top:46%;animation-delay:-1.6s}.chip.c2 i{background:#d8eefc}
-.chip.c3{left:30%;bottom:-16px;animation-delay:-3.2s}.chip.c3 i{background:#d9f2e2}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero{position:relative;isolation:isolate;overflow:hidden;height:min(calc(100svh - 124px),860px);min-height:620px;color:#fff;background:#cfe6f2}
+.slides{position:absolute;inset:0;z-index:-2}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04)}
+.slide.on{opacity:1}
+.slide.on img{animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.14) translate(var(--kx,-1.5%),var(--ky,-1%))}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(8,22,16,0) 38%,rgba(8,22,16,.28) 62%,rgba(8,22,16,.72) 100%),linear-gradient(90deg,rgba(8,22,16,.35) 0%,rgba(8,22,16,0) 55%)}
+.hero .wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-block:40px 44px}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 11px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-weight:700;font-size:13.5px}
+.pill .live{width:8px;height:8px;border-radius:50%;background:#ffd34d;box-shadow:0 0 0 4px rgba(255,211,77,.3)}
+.hero h1{color:#fff;font-size:clamp(46px,6.4vw,96px);letter-spacing:-.025em;line-height:.95;max-width:12ch;margin-top:16px;text-shadow:0 6px 40px rgba(0,0,0,.35)}
+.hero h1 mark{background:none;color:#ffd34d;padding:0}
+.hero .lede{font-size:clamp(17px,1.5vw,20px);color:rgba(255,255,255,.94);max-width:52ch;margin-top:16px;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+.hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:28px;flex-wrap:wrap}
+.qbar{display:flex;align-items:stretch;background:#fff;color:var(--text);border-radius:999px;padding:8px 8px 8px 10px;box-shadow:0 24px 60px rgba(0,0,0,.3);flex:0 1 720px;min-width:0}
+.qbar .q{display:flex;flex-direction:column;justify-content:center;padding:4px 20px;border-right:1px solid var(--line);min-width:0}
+.qbar .q:last-of-type{border-right:0}
+.qbar .q:nth-child(2){flex:1;min-width:160px}
+.qbar .q small{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.qbar .q select{border:0;padding:2px 0;font-weight:600;font-size:15.5px;background:transparent;width:100%;color:var(--muted);cursor:pointer}
+.qbar .qstep{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15.5px}
+.qbar .qstep button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-weight:800;line-height:1}
+.qbar .go{border:0;border-radius:999px;padding:0 26px;font-weight:800;font-size:16px;background:var(--sun-deep);color:#1c1406;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .2s,background .2s}
+.qbar .go:hover{background:#f0b52a;transform:scale(1.03)}
+.dots{position:absolute;top:26px;right:max(16px,calc((100% - 1200px)/2 + 16px));display:flex;gap:8px;align-items:flex-end;padding:10px 14px 8px;border-radius:14px;background:rgba(10,24,18,.38);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.dot{flex:none;white-space:nowrap;width:84px;border:0;background:none;padding:0;text-align:left;color:rgba(255,255,255,.75);font-size:12px;font-weight:700}
+.dot i{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;margin-bottom:7px}
+.dot i::after{content:"";display:block;height:100%;width:0;background:#fff}
+.dot.on{color:#fff}
+.dot.on i::after{animation:fill 7s linear forwards}
+.dot.done i::after{width:100%}
+@keyframes fill{to{width:100%}}
+.hstats{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:rgba(255,255,255,.85)}
+.hstats b{font-family:var(--f-display);font-size:20px;color:#fff;margin-right:6px}
+.rise{animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}}
+.hero .d1{animation-delay:.1s}.hero .d2{animation-delay:.25s}.hero .d3{animation-delay:.4s}.hero .d4{animation-delay:.55s}.hero .d5{animation-delay:.7s}
 
 .finder{background:#fff;border-block:1px solid var(--line);box-shadow:0 8px 24px rgba(24,56,42,.05)}
 .finder .wrap{display:flex;gap:18px 26px;align-items:flex-end;flex-wrap:wrap;padding-block:18px}
@@ -214,6 +237,23 @@ section.s.tint-leaf{background:#f0f7f1}
 .drawer .hero-ph{position:relative;aspect-ratio:16/10;background:#ddd}
 .drawer .hero-ph img{width:100%;height:100%;object-fit:cover;display:block}
 .drawer .x{position:absolute;right:max(14px,env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));width:38px;height:38px;border-radius:50%;border:0;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2);font-size:20px;line-height:1}
+.vr{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+.vr-tabs{display:flex;gap:4px;padding:6px;background:var(--sunk)}
+.vr-tabs button{flex:1;border:0;border-radius:10px;padding:8px 10px;background:none;font-weight:700;font-size:13.5px;color:var(--muted)}
+.vr-tabs button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.vr-stage{position:relative;aspect-ratio:16/9;background:#1d2a22;cursor:grab;touch-action:pan-y;user-select:none}
+.vr-stage.drag{cursor:grabbing}
+.vr-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vr-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,.35) 100%)}
+.vr-badge{position:absolute;left:12px;top:12px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800;letter-spacing:.06em;backdrop-filter:blur(6px)}
+.vr-badge svg{width:16px;height:16px}
+.vr-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:2;background:rgba(255,255,255,.92);color:var(--ink);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:700;white-space:nowrap;transition:opacity .4s}
+.vr-spot{position:absolute;z-index:2;transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;pointer-events:none;color:#fff;font-size:12px;font-weight:800;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.vr-spot i{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 0 0 5px rgba(255,255,255,.35);animation:spot 2s infinite}
+@keyframes spot{50%{box-shadow:0 0 0 9px rgba(255,255,255,0)}}
+.vr-note{padding:12px 14px;font-size:13.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
+.vr-note b{color:var(--ink)}
+.vr-note .tag{flex:none}
 .drawer .bd{padding:22px 24px 30px;display:grid;gap:16px}
 .ratetab{width:100%;border-collapse:collapse;font-size:14.5px}
 .ratetab td{padding:9px 0;border-bottom:1px solid var(--line)}
@@ -341,8 +381,7 @@ tr:last-child td{border-bottom:0}
   .groups,.fixes,.tryit{grid-template-columns:minmax(0,1fr)}
   .snav{display:none}
   .sitehead .btn{margin-left:auto}
-  .mosaic{height:380px;min-height:0}
-  .chip.c1{left:8px}.chip.c2{right:8px}
+  .dots{display:none}
 }
 @media (max-width:640px){
   .cards,.amen,.care{grid-template-columns:minmax(0,1fr)}
@@ -352,8 +391,10 @@ tr:last-child td{border-bottom:0}
   .cabrow img{width:100%;height:160px}
   .cabrow .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
   .row3{grid-template-columns:minmax(0,1fr)}
-  .mosaic{height:300px;gap:10px}
-  .chip{font-size:12px;padding:7px 11px}.chip.c3{display:none}
+  .hero{height:auto;min-height:calc(100svh - 120px)}
+  .hero .wrap{min-height:calc(100svh - 120px)}
+  .qbar{flex-wrap:wrap;border-radius:20px;padding:10px}.qbar .q{flex:1 1 40%;border-right:0;padding:6px 10px}.qbar .go{flex:1 1 100%;justify-content:center;padding:14px;margin-top:6px}
+  .hstats{gap:16px;font-size:13px}.hstats b{font-size:17px}
   .stats{gap:14px}.stats>div{flex:1;min-width:0;font-size:12.5px}.stats b{font-size:19px}
   section.s{padding-block:46px}
   .gallery{grid-auto-rows:150px}
@@ -363,6 +404,9 @@ tr:last-child td{border-bottom:0}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
+</head>
+<body>
+
 
 <div class="demobar"><div class="wrap">
   <span><b>Demo for Sandy</b> by Codember. Try booking a stay, then open the owner side to see it arrive.</span>
@@ -387,23 +431,24 @@ tr:last-child td{border-bottom:0}
     <a class="btn sun" href="#book" data-jump="book">Book now</a>
   </div></header>
 
-  <section class="hero"><div class="wrap">
-    <div>
-      <div class="eyebrow">Goodrich, Texas &middot; Spring-fed lake</div>
-      <h1 id="heroHead" style="margin-top:14px">Come relax with us in the <mark>piney woods.</mark></h1>
-      <p class="lede" id="heroSub">Cozy cabins, a lake house, and RV sites on a quiet 30-acre lake. Fish off your own pier, swim in the pool, and book your stay in two minutes.</p>
-      <div class="ctas"><a class="btn sun" href="#find" data-jump="find">Find your cabin</a><a class="btn line" href="#map" data-jump="map">Explore the property</a></div>
-      <div class="stats"><div><b>30 acres</b>spring-fed lake</div><div><b>Free boats</b>paddle and Jon boats</div><div><b id="fromPrice">From $50</b>a night</div></div>
+  <section class="hero" id="top">
+    <div class="slides" id="slides"><div class="slide on" style="--kx:-1.5%;--ky:-1%"><img src="photos/pool.png" alt="In-ground pool on the grounds" fetchpriority="high"></div><div class="slide" style="--kx:1.5%;--ky:-1%"><img data-src="photos/yellowrose.png" alt="The Yellow Rose cabin on its lawn"></div><div class="slide" style="--kx:-1%;--ky:1%"><img data-src="photos/hero.png" alt="Sunset over the lake from the pier"></div><div class="slide" style="--kx:1.5%;--ky:1%"><img data-src="photos/lakehouse.png" alt="The Lake House"></div><div class="slide" style="--kx:-1.5%;--ky:-1%"><img data-src="photos/campshack.png" alt="Camp Shack under string lights at night"></div></div>
+    <div class="wrap">
+      <div class="dots" id="dots"><button class="dot on" type="button" data-slide="0" aria-label="Show The pool"><i></i>The pool</button><button class="dot" type="button" data-slide="1" aria-label="Show Yellow Rose"><i></i>Yellow Rose</button><button class="dot" type="button" data-slide="2" aria-label="Show Sunsets"><i></i>Sunsets</button><button class="dot" type="button" data-slide="3" aria-label="Show Lake House"><i></i>Lake House</button><button class="dot" type="button" data-slide="4" aria-label="Show Camp Shack"><i></i>Camp Shack</button></div>
+      <div class="pill rise d1"><span class="live"></span>Goodrich, Texas &middot; 30-acre spring-fed lake</div>
+      <h1 id="heroHead" class="rise d2">Come relax with us in the <mark>piney woods.</mark></h1>
+      <p class="lede rise d3" id="heroSub">Cozy cabins, a lake house, and RV sites on a quiet 30-acre lake. Fish off your own pier, swim in the pool, and book your stay in two minutes.</p>
+      <div class="hrow rise d4">
+        <form class="qbar" id="qbar">
+          <div class="q"><small>Guests</small><div class="qstep"><button type="button" data-qstep="-1" aria-label="Fewer guests">&minus;</button><output id="qGuests">2</output><button type="button" data-qstep="1" aria-label="More guests">+</button></div></div>
+          <div class="q"><small>Trip</small><select id="qTrip" aria-label="Trip type"><option value="couple">Couples getaway</option><option value="fishing">Fishing</option><option value="family">Family</option><option value="budget">Budget</option><option value="event">Retreat or event</option></select></div>
+          <div class="q"><small>Pets</small><select id="qPets" aria-label="Bringing a pet"><option value="0">No pets</option><option value="1">Bringing one</option></select></div>
+          <button class="go" type="submit">Find my cabin <span aria-hidden="true">&rarr;</span></button>
+        </form>
+      </div>
+      <div class="hstats rise d5"><div><b>Free</b>paddle and Jon boats</div><div><b>Private</b>piers to fish</div><div><b>Pets</b>welcome</div><div><b id="fromPrice">From $50</b>a night</div></div>
     </div>
-    <div class="mosaic">
-      <figure><img src="photos/hero.webp" alt="Sunset over the lake from the pier"></figure>
-      <figure><img src="photos/yellowrose.webp" alt="The Yellow Rose cabin on the lawn"></figure>
-      <figure><img src="photos/campshack.webp" alt="Camp Shack under string lights at night"></figure>
-      <span class="chip c1"><i>&#9733;</i>Private piers</span>
-      <span class="chip c2"><i>&#9728;</i>In-ground pool</span>
-      <span class="chip c3"><i>&#10003;</i>Pets welcome</span>
-    </div>
-  </div></section>
+  </section>
 
   <div class="finder" id="find"><div class="wrap">
     <div class="field">Guests<div class="stepper"><button type="button" data-step="-1" aria-label="Fewer guests">&minus;</button><output id="fGuests">2</output><button type="button" data-step="1" aria-label="More guests">+</button></div></div>
@@ -426,7 +471,7 @@ tr:last-child td{border-bottom:0}
     <div class="shead"><div><div class="eyebrow">Find your way around</div><h2 style="margin-top:6px">The whole property from above</h2><p>Tap a marker to see what's there. Gold markers are cabins you can book online right now.</p></div></div>
     <div class="mapgrid">
       <div>
-        <div class="mapbox" id="mapbox"><img src="photos/map.webp" alt="Aerial photo of the Yellow Rose Cabin property with cabin labels" width="600" height="509"></div>
+        <div class="mapbox" id="mapbox"><img src="photos/map.png" alt="Aerial photo of the Yellow Rose Cabin property with cabin labels" width="600" height="509"></div>
         <div class="legend"><span><i style="background:#ffd34d"></i>Book online</span><span><i style="background:#5fc3d8"></i>Amenity</span><span><i style="background:#fff;box-shadow:0 0 0 2px #18382a"></i>Call to ask</span></div>
       </div>
       <div class="mapcard" id="mapcard"></div>
@@ -469,7 +514,7 @@ tr:last-child td{border-bottom:0}
     <div class="shead"><div><div class="eyebrow">Things to do</div><h2 style="margin-top:6px">Fish, swim, float, repeat</h2><p>Boats are free for every guest. Bring your rod or rent one from us.</p></div></div>
     <div class="amen" id="amenGrid"></div>
     <div class="feature">
-      <figure><img src="photos/fish.webp" alt="A guest holding a fish caught on the lake"></figure>
+      <figure><img src="photos/fish.png" loading="lazy" decoding="async" alt="A guest holding a fish caught on the lake"></figure>
       <div>
         <h3 style="font-size:28px">Fishing on our spring-fed lake</h3>
         <p class="muted" style="margin-top:8px;font-size:16px">Cast from your private pier or take a Jon boat out to the cove. Overnight guests fish free.</p>
@@ -493,22 +538,22 @@ tr:last-child td{border-bottom:0}
           <div><span>Fire starters</span><span>$1 each</span></div>
         </div>
       </div>
-      <figure><img src="photos/pool.webp" alt="The in-ground pool on the grounds"></figure>
+      <figure><img src="photos/pool.png" loading="lazy" decoding="async" alt="The in-ground pool on the grounds"></figure>
     </div>
   </div></section>
 
   <section class="s tint-leaf" id="gallery"><div class="wrap">
     <div class="shead"><div><div class="eyebrow">Photos</div><h2 style="margin-top:6px">A look around</h2></div></div>
     <div class="gallery">
-      <figure class="big"><img src="photos/hero.webp" alt="Sunset over the lake"></figure>
-      <figure><img src="photos/lakehouse.webp" alt="The Lake House"></figure>
-      <figure><img src="photos/pool.webp" alt="The pool"></figure>
-      <figure><img src="photos/campshack.webp" alt="Camp Shack at night"></figure>
-      <figure><img src="photos/fish.webp" alt="A catch from the lake"></figure>
-      <figure><img src="photos/cowboy.webp" alt="Cowboy Casa porch"></figure>
-      <figure><img src="photos/barndo.webp" alt="Inside the Barndo"></figure>
-      <figure><img src="photos/rv.webp" alt="Covered RV site"></figure>
-      <figure><img src="photos/yellowrose.webp" alt="The Yellow Rose"></figure>
+      <figure class="big"><img src="photos/hero.png" loading="lazy" decoding="async" alt="Sunset over the lake"></figure>
+      <figure><img src="photos/lakehouse.png" loading="lazy" decoding="async" alt="The Lake House"></figure>
+      <figure><img src="photos/pool.png" loading="lazy" decoding="async" alt="The pool"></figure>
+      <figure><img src="photos/campshack.png" loading="lazy" decoding="async" alt="Camp Shack at night"></figure>
+      <figure><img src="photos/fish.png" loading="lazy" decoding="async" alt="A catch from the lake"></figure>
+      <figure><img src="photos/cowboy.png" loading="lazy" decoding="async" alt="Cowboy Casa porch"></figure>
+      <figure><img src="photos/barndo.png" loading="lazy" decoding="async" alt="Inside the Barndo"></figure>
+      <figure><img src="photos/rv.png" loading="lazy" decoding="async" alt="Covered RV site"></figure>
+      <figure><img src="photos/yellowrose.png" loading="lazy" decoding="async" alt="The Yellow Rose"></figure>
     </div>
   </div></section>
 
@@ -649,7 +694,7 @@ const DEFAULT_CONTENT = {
   },
   rv: { covered:625, uncovered:575 }
 };
-const PHOTO = k => `photos/${k}.webp`;
+const PHOTO = k => `photos/${k}.png`;
 const clone = o => JSON.parse(JSON.stringify(o));
 const S = { content: clone(DEFAULT_CONTENT), bookings: [], blocks: [], messages: [], db: null, writable: true, connected: false };
 const C = () => S.content;
@@ -763,7 +808,7 @@ function cabinCard(k, extra){
 }
 function renderMatches(){
   const pets = $("#fPets").checked;
-  $("#fGuests").textContent = fGuests;
+  $("#fGuests").textContent = fGuests; if ($("#qGuests")) $("#qGuests").textContent = fGuests;
   $("#matchHead").textContent = `Cabins for ${TRIP[fTrip]}`;
   const list = visibleKeys().map(k => {
     const c = C().cabins[k], f = (FIT[fTrip]||{})[k], why = [];
@@ -788,6 +833,15 @@ function openDrawer(k){
   $("#drawer").innerHTML = `<div class="hero-ph"><img src="${PHOTO(k)}" alt="${esc(c.name)}"><button class="x" type="button" data-close aria-label="Close">&times;</button></div>
     <div class="bd"><div><div class="eyebrow">Yellow Rose Cabin</div><h2 style="margin-top:4px">${esc(c.name)}</h2></div>
     <p style="font-size:16px">${esc(c.blurb)}</p>
+    <div class="vr" id="vr">
+      <div class="vr-tabs" role="group" aria-label="Tour type"><button type="button" data-vrmode="inside" aria-pressed="true">360&deg; walk-through</button><button type="button" data-vrmode="drone" aria-pressed="false">Drone flyover</button></div>
+      <div class="vr-stage" id="vrStage"><canvas id="vrCanvas" aria-label="Preview of a 360 degree tour of ${esc(c.name)}"></canvas>
+        <span class="vr-badge" id="vrBadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4l-2-3h-2l-2 3H5a2 2 0 0 1-2-2z"/><circle cx="8" cy="11" r="1.6"/><circle cx="16" cy="11" r="1.6"/></svg>VR TOUR</span>
+        <div id="vrSpots"></div>
+        <span class="vr-hint" id="vrHint">Drag to look around</span>
+      </div>
+      <div class="vr-note"><span class="tag sun">Preview</span><span id="vrNote"><b>Walk through every room in 360&deg;.</b> Guests will look around inside ${esc(c.name)} on their phone or in a VR headset before they book. Filmed on-site with a 360 camera when we come out with the drones.</span></div>
+    </div>
     <div class="amlist">${(c.meta||[]).map(m => `<span class="tag sun">${esc(m)}</span>`).join("")}</div>
     <div><h3 style="margin-bottom:6px">Rates</h3><table class="ratetab">${rate("Nightly",c.night)}${rate("Nightly with breakfast",c.bfast)}${rate("3 or more weeknights, per night",c.weeknight)}${rate("Weekly (7 nights)",c.week)}${rate("Cleaning fee",c.clean)}</table>
     <p class="muted" style="font-size:13px;margin-top:8px">Rates for up to ${c.base} guests. Extra guests ${money(C().fees.extra)} a night.${c.pets ? ` Pets ${money(C().fees.pet)} a night each.` : " No pets in this unit."} Plus ${C().fees.tax}% tax.</p></div>
@@ -795,23 +849,72 @@ function openDrawer(k){
     <button class="btn sun" type="button" data-book="${k}">Check dates for ${esc(c.name)}</button></div>`;
   $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); $("#drawer").setAttribute("aria-hidden","false");
   $("#drawer .x").focus();
+  startVR(k);
+}
+/* VR tour preview: a looping 360 look-around built from the cabin photo, and a drone fly-in on the aerial map */
+let vrRaf = 0;
+function startVR(k){
+  cancelAnimationFrame(vrRaf);
+  const stage = $("#vrStage"), cv = $("#vrCanvas"), ctx = cv.getContext("2d"), spots = $("#vrSpots"), hint = $("#vrHint"), note = $("#vrNote"), name = esc(C().cabins[k].name);
+  const pp = PINS.find(p => p.k === k) || {x:50, y:40}, pin = {x:pp.x, y: pp.y < 8 ? pp.y + 5.4 : pp.y - 5.2};
+  let mode = "inside", off = 0, vel = .35, dragging = false, lastX = 0, t0 = performance.now(), img = new Image(), map = new Image(), touched = false;
+  img.src = PHOTO(k); map.src = "photos/map.png";
+  const SP = [{a:.18,y:.55,l:"Porch"},{a:.52,y:.5,l:"Step inside"},{a:.84,y:.45,l:"Lake view"}];
+  function size(){ const r = stage.getBoundingClientRect(), d = Math.min(2, devicePixelRatio||1); cv.width = r.width*d; cv.height = r.height*d; }
+  function drawInside(){
+    const W = cv.width, H = cv.height; if (!img.complete || !img.naturalWidth) return;
+    const h = H*1.25, w = img.naturalWidth * h / img.naturalHeight, tile = w*2, y = (H-h)/2;
+    let x = -((off % tile) + tile) % tile;
+    for (; x < W; x += tile){ ctx.drawImage(img, x, y, w, h); ctx.save(); ctx.translate(x + tile, 0); ctx.scale(-1, 1); ctx.drawImage(img, 0, y, w, h); ctx.restore(); }
+    const rw = stage.clientWidth, sc = rw / W;
+    spots.innerHTML = SP.map(s => { let sx = (s.a*tile - (((off % tile) + tile) % tile)); if (sx < -60) sx += tile; return sx*sc > -60 && sx*sc < rw+60 ? `<span class="vr-spot" style="left:${sx*sc}px;top:${s.y*100}%"><i></i>${s.l}</span>` : ""; }).join("");
+  }
+  function drawDrone(now){
+    const W = cv.width, H = cv.height; if (!map.complete || !map.naturalWidth) return;
+    const p = Math.min(1, (now - t0) / 5200), e = 1 - Math.pow(1-p, 3), z = 1 + e*1.9;
+    const cx = map.naturalWidth * (.5 + (pin.x/100 - .5)*e), cy = map.naturalHeight * (.5 + (pin.y/100 - .5)*e);
+    const sw = map.naturalWidth / z, sh = sw * H / W;
+    ctx.drawImage(map, cx - sw/2, cy - sh/2, sw, sh, 0, 0, W, H);
+    const px = (map.naturalWidth*pin.x/100 - (cx - sw/2)) / sw * W, py = (map.naturalHeight*pin.y/100 - (cy - sh/2)) / sh * H, r = (8 + 6*Math.sin(now/300)) * (W/stage.clientWidth);
+    ctx.fillStyle = "rgba(255,211,77,.35)"; ctx.beginPath(); ctx.arc(px, py, r*2.2, 0, 6.28); ctx.fill();
+    ctx.fillStyle = "#ffd34d"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 3*(W/stage.clientWidth); ctx.beginPath(); ctx.arc(px, py, r*.9, 0, 6.28); ctx.fill(); ctx.stroke();
+    spots.innerHTML = "";
+  }
+  function loop(now){
+    if (!document.getElementById("vrStage")) return;
+    if (mode === "inside"){ if (!dragging) off += vel * (reduceMotion ? 0 : 1); drawInside(); } else drawDrone(reduceMotion ? t0 + 6000 : now);
+    if ($("#drawer").classList.contains("on")) vrRaf = requestAnimationFrame(loop);
+  }
+  size(); vrRaf = requestAnimationFrame(loop);
+  stage.addEventListener("pointerdown", e => { if (mode !== "inside") return; dragging = true; lastX = e.clientX; stage.classList.add("drag"); stage.setPointerCapture(e.pointerId); if (!touched){ touched = true; hint.style.opacity = 0; } });
+  stage.addEventListener("pointermove", e => { if (!dragging) return; const d = (e.clientX - lastX) * (cv.width / stage.clientWidth); off -= d; vel = Math.max(-2, Math.min(2, -d*.05)) || .35; lastX = e.clientX; });
+  const up = () => { dragging = false; stage.classList.remove("drag"); if (Math.abs(vel) < .2) vel = .35 * Math.sign(vel || 1); };
+  stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
+  $$("[data-vrmode]").forEach(b => b.addEventListener("click", () => {
+    mode = b.dataset.vrmode; t0 = performance.now(); $$("[data-vrmode]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    $("#vrBadge").lastChild.textContent = mode === "inside" ? "VR TOUR" : "DRONE";
+    hint.textContent = mode === "inside" ? "Drag to look around" : "Flying in to " + C().cabins[k].name; hint.style.opacity = 1;
+    note.innerHTML = mode === "inside"
+      ? `<b>Walk through every room in 360&deg;.</b> Guests will look around inside ${name} on their phone or in a VR headset before they book. Filmed on-site with a 360 camera when we come out with the drones.`
+      : `<b>See it from the sky.</b> A real drone flyover of the lake and the path to ${name}, so guests know exactly where they're staying. We film this on the same visit as the 360 tours.`;
+  }));
 }
 function closeDrawer(){ $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); $("#drawer").setAttribute("aria-hidden","true"); }
 
 /* Property map */
 const PINS = [
-  {k:"lakehouse", x:7.5, y:8.8}, {k:"campshack", x:56.2, y:4.3}, {k:"cowboy", x:38.8, y:18.7}, {k:"yellowrose", x:69, y:34}, {k:"barndo", x:56.3, y:39.7},
-  {k:"pool", x:47, y:31.8, kind:"amen", name:"Pool", text:"In-ground pool in a park-like setting, right beside the Barndo.", photo:"pool"},
-  {k:"rvsites", x:26.7, y:50, kind:"rv", name:"RV Sites", text:"Two covered sites and one open site. Electric, sewer, water, garbage pickup, and Wi-Fi included.", photo:"rv"},
-  {k:"main", x:60, y:22.6, kind:"other", name:"Main House", text:"The main house on the property."},
-  {k:"redrose", x:25.5, y:27, kind:"other", name:"Red Rose", text:"Has a washer and dryer. Call to ask about dates."},
-  {k:"bearshack", x:5.5, y:32.4, kind:"other", name:"Bear Shack", text:"Near the Lake House back porch. Call to ask about dates."},
-  {k:"texan", x:21, y:38, kind:"other", name:"Texan", text:"Call to ask about dates."},
-  {k:"tiki", x:31, y:44.6, kind:"other", name:"Tiki Hut", text:"Call to ask about dates."},
-  {k:"texasrose", x:18.3, y:52, kind:"other", name:"Texas Rose", text:"Call to ask about dates."},
-  {k:"lakerv", x:11.7, y:20, kind:"other", name:"Lake RV Site", text:"An RV site near the water. Call to ask."},
-  {k:"henden", x:82.5, y:82.7, kind:"other", name:"Hen Den", text:"Call to ask about dates."},
-  {k:"bluebird", x:94.3, y:89.4, kind:"other", name:"Blue Bird", text:"Call to ask about dates."}
+  {k:"lakehouse", x:8, y:7.9}, {k:"campshack", x:55, y:3.9}, {k:"cowboy", x:40.3, y:14.1}, {k:"yellowrose", x:71.3, y:33.6}, {k:"barndo", x:55.8, y:38.9},
+  {k:"pool", x:47.5, y:28.1, kind:"amen", name:"Pool", text:"In-ground pool in a park-like setting, right beside the Barndo.", photo:"pool"},
+  {k:"rvsites", x:20.8, y:58.9, kind:"rv", name:"RV Sites", text:"Two covered sites and one open site. Electric, sewer, water, garbage pickup, and Wi-Fi included.", photo:"rv"},
+  {k:"main", x:60.3, y:21.8, kind:"other", name:"Main House", text:"The main house on the property."},
+  {k:"redrose", x:25.8, y:26.1, kind:"other", name:"Red Rose", text:"Has a washer and dryer. Call to ask about dates."},
+  {k:"bearshack", x:6, y:31.8, kind:"other", name:"Bear Shack", text:"Near the Lake House back porch. Call to ask about dates."},
+  {k:"texan", x:21.8, y:36.5, kind:"other", name:"Texan", text:"Call to ask about dates."},
+  {k:"tiki", x:31.7, y:43.4, kind:"other", name:"Tiki Hut", text:"Call to ask about dates."},
+  {k:"texasrose", x:18.5, y:51.5, kind:"other", name:"Texas Rose", text:"Call to ask about dates."},
+  {k:"lakerv", x:12, y:19.6, kind:"other", name:"Lake RV Site", text:"An RV site near the water. Call to ask."},
+  {k:"henden", x:82.7, y:81.1, kind:"other", name:"Hen Den", text:"Call to ask about dates."},
+  {k:"bluebird", x:94.3, y:88.2, kind:"other", name:"Blue Bird", text:"Call to ask about dates."}
 ];
 let pinOn = "yellowrose";
 function renderMap(){
@@ -1156,8 +1259,27 @@ $("#qchips").addEventListener("click", e => { const b = e.target.closest("button
 say("Hi! I can answer questions about the cabins, fishing, pets, and directions. Anything I can't answer goes straight to Sandy.", "bot");
 
 window.addEventListener("hashchange", route);
+/* Hero: quick search bar and photo slideshow */
+(function(){
+  const qG = $("#qGuests");
+  $$("[data-qstep]").forEach(b => b.addEventListener("click", () => { fGuests = Math.max(1, Math.min(40, fGuests + +b.dataset.qstep)); qG.textContent = fGuests; renderMatches(); }));
+  $("#qbar").addEventListener("submit", e => {
+    e.preventDefault();
+    const t = $("#qTrip").value; const btn = document.querySelector(`[data-trip="${t}"]`); if (btn) btn.click();
+    $("#fPets").checked = $("#qPets").value === "1"; $("#fPets").dispatchEvent(new Event("change"));
+    renderMatches(); jumpTo("find");
+  });
+  const slides = $$("#slides .slide"), dots = $$("#dots .dot"); let cur = 0, timer;
+  const load = i => { const im = slides[i].querySelector("img"); if (im.dataset.src){ im.src = im.dataset.src; im.removeAttribute("data-src"); } };
+  function show(i){ load(i); load((i+1) % slides.length);
+    slides.forEach((s,j) => s.classList.toggle("on", j === i)); dots.forEach((d,j) => { d.classList.toggle("on", j === i); d.classList.toggle("done", j < i); });
+    cur = i; clearTimeout(timer); if (!reduceMotion) timer = setTimeout(() => show((cur+1) % slides.length), 7000); }
+  dots.forEach(d => d.addEventListener("click", () => show(+d.dataset.slide)));
+  const first = slides[0].querySelector("img"); (first.complete ? show(0) : first.addEventListener("load", () => show(0), {once:true}));
+})();
 route(); setLive(); connect();
 })();
 </script>
 
-</body></html>
+</body>
+</html>
